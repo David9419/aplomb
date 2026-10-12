@@ -14,8 +14,8 @@ const MAX_TIME = 8000;
 /**
  * Écran d'ouverture :
  * trame de plan, cotes qui se tracent, logo qui se révèle du bas vers le haut, compteur 0 → 100 %.
- * Sur l'accueil, il attend que la maison 3D soit réellement prête (événement « scene:ready »),
- * puis s'ouvre en deux volets sur la scène.
+ * Sur l'accueil, il attend que la première image de la visite soit réellement chargée (événement « scene:ready »),
+ * puis s'ouvre en deux volets sur la maison.
  */
 export function Loader() {
   const pathname = usePathname();
@@ -31,7 +31,7 @@ export function Loader() {
     // Montée régulière jusqu'à 86 %, le reste quand tout est prêt.
     const climb = animate(progress, 86, { duration: MIN_TIME / 1000, ease: [0.4, 0, 0.2, 1] });
     let pageLoaded = document.readyState === "complete";
-    let sceneReady = !waitScene.current;
+    let sceneReady = !waitScene.current || (window as Window & { __sceneReady?: boolean }).__sceneReady === true;
     let finished = false;
 
     const finish = () => {
@@ -167,7 +167,7 @@ export function Loader() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                {pathname === "/" ? "Préparation de la maquette 3D" : "Chargement"}
+                {pathname === "/" ? "Préparation de la visite" : "Chargement"}
               </motion.p>
               <p className="text-[clamp(2.8rem,7vw,5rem)] font-medium leading-none tracking-[-0.04em] text-ink tabular-nums">
                 {String(pct).padStart(3, "0")}

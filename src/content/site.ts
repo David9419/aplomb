@@ -43,7 +43,7 @@ export const hero = {
   cta: "Parlons de votre projet",
 };
 
-// Visite 3D d'ouverture : chaque étape s'affiche pendant le défilement.
+// Visite d'ouverture en images : chaque étape s'affiche pendant le défilement.
 // La maison est un plan d'illustration (pas le bien d'un client).
 export const intro = {
   scrollHint: "Faites défiler pour visiter",
@@ -90,6 +90,46 @@ export const intro = {
       text: "Un imprévu ou une difficulté de mise en œuvre : j'analyse la situation et recherche une solution dans le respect des règles de l'art.",
     },
   ],
+  /** Étiquettes posées sur les images de la visite (positions calculées au rendu : tour-points.json). */
+  labels: {
+    hero: [],
+    facades: [
+      { id: "toiture", title: "Toiture 4 pans", value: "tuiles terre cuite" },
+      { id: "balcon", title: "Balcon", value: "garde-corps à câbles" },
+      { id: "baie", title: "Baie coulissante alu", value: "3,60 × 2,55 m" },
+      { id: "enduit", title: "Enduit de façade", value: "finition grattée" },
+      { id: "pergola", title: "Pergola bioclimatique", value: "lames orientables" },
+      { id: "piscine", title: "Piscine", value: "22 × 4 m" },
+    ],
+    plan: [
+      { id: "sejour", title: "Séjour", value: "84 m²" },
+      { id: "cuisine", title: "Cuisine & repas", value: "90 m²" },
+      { id: "terrasse", title: "Terrasse en pierre", value: "24 × 7 m" },
+      { id: "pergola", title: "Pergola", value: "8,50 × 4,20 m" },
+      { id: "escalier", title: "Escalier", value: "vers l'étage" },
+    ],
+    sejour: [
+      { id: "parquet", title: "Parquet chêne", value: "pose à l'anglaise" },
+      { id: "baie", title: "Baie coulissante", value: "3,90 × 2,55 m" },
+      { id: "cheminee", title: "Cheminée", value: "foyer encastré" },
+      { id: "canape", title: "Canapé velours", value: "2,60 m" },
+      { id: "hauteur", title: "Hauteur sous plafond", value: "2,75 m" },
+    ],
+    cuisine: [
+      { id: "ilot", title: "Îlot", value: "plan marbre · 4,20 m" },
+      { id: "suspensions", title: "Suspensions", value: "au-dessus de l'îlot" },
+      { id: "table", title: "Table chêne", value: "6 couverts" },
+      { id: "facades", title: "Façades laquées", value: "sans poignées" },
+      { id: "baies", title: "Baies coulissantes", value: "3,90 × 2,60 m" },
+    ],
+    coupe: [
+      { id: "charpente", title: "Charpente", value: "faîtage · chevrons" },
+      { id: "isolation", title: "Isolation", value: "combles" },
+      { id: "plancher", title: "Plancher", value: "dalle béton" },
+      { id: "murs", title: "Murs", value: "fissures · humidité" },
+      { id: "fondations", title: "Fondations", value: "semelles filantes" },
+    ],
+  },
   outro: {
     title: "Votre projet mérite",
     accent: "ce regard.",
@@ -514,14 +554,14 @@ export const legalNotice = {
       title: "Propriété intellectuelle",
       paragraphs: [
         "L'ensemble des contenus du site (textes, photographies, logo, éléments graphiques et animations) est la propriété de Baron Conseil Bâtiment ou de ses partenaires. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.",
-        "La maison présentée en 3D sur la page d'accueil est une maquette d'illustration et ne représente pas le bien d'un client.",
+        "La villa présentée en images sur la page d'accueil est une maquette d'illustration et ne représente pas le bien d'un client.",
       ],
     },
     {
-      title: "Crédits 3D",
+      title: "Crédits des images 3D",
       paragraphs: [
-        "Mobilier 3D : « Glam Velvet Sofa » et « Sheen Chair » © Wayfair LLC, licence CC BY 4.0 ; « Diffuse Transmission Plant » © 2024 Darmstadt Graphics Group, licence CC BY 4.0 (modèles d'exemple Khronos glTF).",
-        "Textures et éclairage : exemples three.js et Poly Haven (licence CC0).",
+        "Les images de la villa présentées sur la page d'accueil sont des rendus 3D calculés avec Blender (moteur Cycles).",
+        "Mobilier 3D : « Glam Velvet Sofa » et « Sheen Chair » © Wayfair LLC, licence CC BY 4.0 ; « Diffuse Transmission Plant » © 2024 Darmstadt Graphics Group, licence CC BY 4.0 (modèles d'exemple Khronos glTF). Textures de parquet et de pelouse : exemples du projet three.js (licence MIT).",
       ],
     },
     {

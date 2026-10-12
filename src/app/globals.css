@@ -144,3 +144,21 @@ html[data-ready] .word > span {
 html.lenis, html.lenis body { height: auto; }
 .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* Visite en images : cadre au format de l'image qui couvre tout l'écran (les étiquettes suivent l'image). */
+.tour-frame {
+  --ar: 1.6;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, calc(100svh * var(--ar)));
+  height: max(100svh, calc(100vw / var(--ar)));
+  translate: -50% -50%;
+}
+@media (max-aspect-ratio: 9/10) {
+  .tour-frame { --ar: 0.5625; }
+  .tour-wide { display: none; }
+}
+@media not (max-aspect-ratio: 9/10) {
+  .tour-tall { display: none; }
+}

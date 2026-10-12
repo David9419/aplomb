@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
-import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowDown, ArrowRight, Phone } from "lucide-react";
 
 import { contact, hero, intro } from "@/content/site";
@@ -10,18 +9,10 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/site/Motion";
-import type { TourState } from "@/components/three/VillaScene";
+import { TOUR_VIEWS, TourStage } from "@/components/sections/TourStage";
 
-const VillaScene = dynamic(() => import("@/components/three/VillaScene"), { ssr: false });
-
-// Fenêtres de défilement de chaque étape (identiques à TOUR_WINDOWS dans VillaScene.tsx).
-const WINDOWS: [number, number][] = [
-  [0.05, 0.15],
-  [0.18, 0.34],
-  [0.4, 0.53],
-  [0.57, 0.69],
-  [0.79, 0.94],
-];
+// Fenêtres de défilement de chaque étape (la première image est l'accueil).
+const WINDOWS = TOUR_VIEWS.slice(1).map((v) => v.win);
 
 function Words({ text, start, className }: { text: string; start: number; className?: string }) {
   return text.split(" ").map((w, i) => (
@@ -35,16 +26,12 @@ function Words({ text, start, className }: { text: string; start: number; classN
 }
 
 /**
- * Ouverture plein écran : une visite 3D de maison pilotée par le défilement
- * (plan, séjour, cuisine, fondations et charpente), avec le texte qui accompagne.
+ * Ouverture plein écran : une visite de villa en images photoréalistes pilotée par le défilement
+ * (façades, plan, séjour, cuisine, coupe du sol au toit), avec le texte qui accompagne.
  */
 export function Tour() {
   const section = useRef<HTMLElement>(null);
-  const tour = useRef<TourState>({ progress: 0 });
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    tour.current.progress = v;
-  });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 0.045], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.045], [0, -60]);
@@ -57,10 +44,8 @@ export function Tour() {
   return (
     <section id="accueil" ref={section} className="relative h-[760vh]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
-        {/* Scène 3D plein écran */}
-        <div className="intro absolute inset-0" style={{ ["--d" as string]: 0 }}>
-          <VillaScene tour={tour} />
-        </div>
+        {/* Images plein écran */}
+        <TourStage progress={scrollYProgress} />
         {/* Voiles pour fondre la scène dans la page */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bone/90 to-transparent sm:h-40" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bone to-transparent" />
