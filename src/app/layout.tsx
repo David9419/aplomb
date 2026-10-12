@@ -46,7 +46,7 @@ const jsonLd = {
   description: site.description,
   telephone: "+33744981775",
   url: site.url,
-  areaServed: ["Paris", "Hauts-de-Seine", "Val-de-Marne", "Essonne"],
+  areaServed: ["Paris", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne", "Val-d'Oise", "Essonne"],
   knowsAbout: [
     "Pathologie du bâtiment",
     "Suivi de chantier",

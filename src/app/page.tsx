@@ -1,4 +1,4 @@
-import { Hero } from "@/components/sections/Hero";
+import { Tour } from "@/components/sections/Tour";
 import { Marquee } from "@/components/sections/Marquee";
 import { Services } from "@/components/sections/Services";
 import { Pathologies } from "@/components/sections/Pathologies";
@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Hero />
+        <Tour />
         <Marquee />
         <Services />
         <Pathologies />

@@ -6,7 +6,7 @@ export const site = {
   baseline: "Conseil & expertise bâtiment",
   title: "Aplomb — Conseil & expertise bâtiment à Paris et en Île-de-France",
   description:
-    "Conseil technique, diagnostic des pathologies du bâtiment et suivi de chantier à Paris, dans le 92, le 94 et le 91. Un expert indépendant qui ne réalise aucuns travaux.",
+    "Conseil technique, diagnostic des pathologies du bâtiment et suivi de chantier à Paris et en Île-de-France : 92, 93, 94, 95 et 91. Un expert indépendant qui ne réalise aucuns travaux.",
   url: "https://www.aplomb-conseil.fr", // TODO : domaine définitif à acheter
 };
 
@@ -46,6 +46,52 @@ export const hero = {
     "Aucune réalisation de travaux",
     "Aucune commission sur les devis d'entreprises",
   ],
+};
+
+// Visite 3D d'ouverture : chaque étape s'affiche pendant le défilement.
+// La maison est un plan d'illustration (pas le bien d'un client).
+export const intro = {
+  scrollHint: "Faites défiler pour visiter",
+  note: "Maquette d'illustration",
+  steps: [
+    {
+      key: "plan",
+      index: "01",
+      label: "Le plan",
+      title: "Lire le plan,",
+      accent: "pièce par pièce.",
+      text: "Surfaces, circulations, cloisons : avant de juger le bâti, je comprends comment le logement est organisé.",
+    },
+    {
+      key: "sejour",
+      index: "02",
+      label: "Le séjour",
+      title: "Matières, couleurs,",
+      accent: "lumière.",
+      text: "Sols, enduits, ouvertures : chaque choix compte pour un intérieur beau, sain et durable.",
+    },
+    {
+      key: "cuisine",
+      index: "03",
+      label: "La cuisine",
+      title: "Les mesures",
+      accent: "justes.",
+      text: "Implantation, réseaux, ventilation : les détails techniques qui font qu'une pièce fonctionne vraiment.",
+    },
+    {
+      key: "structure",
+      index: "04",
+      label: "Du sol au toit",
+      title: "En bas, en haut,",
+      accent: "partout.",
+      text: "Des fondations à la charpente, je cherche la cause d'un désordre là où elle se trouve, pas seulement là où elle se voit.",
+    },
+  ],
+  outro: {
+    title: "Votre bâtiment mérite",
+    accent: "ce regard.",
+    cta: "Découvrir mes missions",
+  },
 };
 
 export const services = {
@@ -179,12 +225,14 @@ export const independence = {
 
 export const area = {
   eyebrow: "Secteur d'intervention",
-  title: "Paris et sa proche banlieue sud et ouest.",
-  lead: "J'interviens à Paris, dans les Hauts-de-Seine, le Val-de-Marne, l'Essonne et les communes alentour. Un doute sur votre adresse ? Appelez-moi.",
+  title: "Paris et toute l'Île-de-France proche.",
+  lead: "J'interviens à Paris, dans les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne, le Val-d'Oise, l'Essonne et les communes alentour. Un doute sur votre adresse ? Appelez-moi.",
   zones: [
     { code: "75", name: "Paris" },
     { code: "92", name: "Hauts-de-Seine" },
+    { code: "93", name: "Seine-Saint-Denis" },
     { code: "94", name: "Val-de-Marne" },
+    { code: "95", name: "Val-d'Oise" },
     { code: "91", name: "Essonne" },
   ],
   more: "et alentours",
@@ -196,7 +244,7 @@ export const contactSection = {
   lead: "Appelez-moi ou envoyez un SMS avec quelques mots sur votre situation, et si possible des photos. Je vous rappelle pour fixer un premier échange.",
   call: "Appeler",
   sms: "Envoyer un SMS",
-  areaLabel: "Paris · 92 · 94 · 91 et alentours",
+  areaLabel: "Paris · 92 · 93 · 94 · 95 · 91 et alentours",
 };
 
 export const marquee = [
@@ -236,7 +284,7 @@ export const faq = {
     },
     {
       q: "Dans quels secteurs intervenez-vous ?",
-      a: "À Paris, dans les Hauts-de-Seine (92), le Val-de-Marne (94), l'Essonne (91) et les communes alentour. En cas de doute sur votre adresse, appelez-moi.",
+      a: "À Paris, dans les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94), le Val-d'Oise (95), l'Essonne (91) et les communes alentour. En cas de doute sur votre adresse, appelez-moi.",
     },
   ],
 };

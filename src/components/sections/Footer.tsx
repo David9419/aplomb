@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Logo />
-            <p className="mt-5 max-w-[22rem] text-[0.95rem] leading-[1.7] text-ink-2">{footer.tagline}. Paris, Hauts-de-Seine, Val-de-Marne, Essonne et alentours.</p>
+            <p className="mt-5 max-w-[22rem] text-[0.95rem] leading-[1.7] text-ink-2">{footer.tagline}. Paris, 92, 93, 94, 95, 91 et alentours.</p>
           </div>
           <nav aria-label="Pied de page">
             <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-stone">Navigation</p>
