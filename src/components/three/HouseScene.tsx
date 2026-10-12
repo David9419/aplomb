@@ -629,7 +629,7 @@ export default function HouseScene({ tour }: { tour: React.RefObject<TourState> 
       <Canvas
         frameloop={visible ? "always" : "never"}
         dpr={[1, 1.75]}
-        shadows
+        shadows={{ type: THREE.PCFShadowMap }}
         camera={{ position: [15, 10.5, 17], fov: 34, near: 0.1, far: 200 }}
         gl={{ antialias: true, alpha: true }}
       >
