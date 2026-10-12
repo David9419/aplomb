@@ -155,7 +155,7 @@ export const services = {
 export const field = {
   eyebrow: "Sur le terrain",
   title: "Des chantiers concrets.",
-  lead: "Construction, rénovation, suivi de chantier : une expérience polyvalente, acquise chantier après chantier.",
+  lead: "Construction, rénovation, suivi de chantier : une expérience polyvalente, acquise chantier après chantier. Cliquez sur une photo pour l'agrandir.",
   photos: [
     {
       src: "/images/chantier-sejour-cuisine.jpg",
@@ -164,6 +164,38 @@ export const field = {
       alt: "Pièce de vie rénovée sous les toits : cuisine équipée blanche, parquet en chêne clair et poutres anciennes apparentes",
       caption: "Pièce de vie sous les toits",
       detail: "Cuisine, parquet chêne, poutres apparentes",
+    },
+    {
+      src: "/images/chantier-entree.jpg",
+      width: 1200,
+      height: 1600,
+      alt: "Couloir d'entrée : carreaux hexagonaux noir et beige qui se fondent dans un parquet en chêne, plafond noir avec spots encastrés",
+      caption: "Entrée et couloir",
+      detail: "Carreaux hexagonaux, parquet, plafond noir",
+    },
+    {
+      src: "/images/chantier-salle-eau-vasque.jpg",
+      width: 1200,
+      height: 1600,
+      alt: "Salle d'eau : faïence cannelée blanche, meuble vasque en bois suspendu, miroir rond et suspensions noires",
+      caption: "Salle d'eau",
+      detail: "Faïence cannelée, meuble bois",
+    },
+    {
+      src: "/images/chantier-local-commercial.jpg",
+      width: 1600,
+      height: 1201,
+      alt: "Local commercial aménagé : étagères rétroéclairées, meubles bas, îlot à plateau marbré et comptoir rose",
+      caption: "Local commercial",
+      detail: "Étagères rétroéclairées, îlot, comptoir",
+    },
+    {
+      src: "/images/chantier-salle-eau-douche.jpg",
+      width: 1200,
+      height: 1600,
+      alt: "Douche avec faïence cannelée claire, colonne de douche noire et receveur blanc",
+      caption: "Douche",
+      detail: "Robinetterie noire, faïence cannelée",
     },
     {
       src: "/images/chantier-salle-de-bain.jpg",

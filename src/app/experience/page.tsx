@@ -23,7 +23,7 @@ function Eyebrow({ children, dark = false }: { children: React.ReactNode; dark?:
 
 export default function ExperiencePage() {
   const { intro, specialty, pillars, approach, commitment } = experience;
-  const photo = field.photos[1];
+  const photo = field.photos.find((p) => p.src.includes("vasque")) ?? field.photos[0];
 
   return (
     <>
