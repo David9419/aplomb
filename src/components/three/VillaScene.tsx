@@ -554,9 +554,13 @@ function Outdoor({ m }: { m: Mats }) {
         <B key={x} p={[-3 + i * 0.1 + (x + 2.6) * 0, -0.02, -11.9 - i * 0.55]} s={[1.1, 0.06, 0.5]} m={m.paving} />
       ))}
       {/* piscine 24 × 5 m, liner sombre */}
-      <B p={[0, -0.07, -16.5]} s={[25.2, 0.1, 6.2]} m={m.coping} cast={false} />
+      {/* margelle : cadre en pierre autour du bassin */}
+      <B p={[0, -0.07, -13.7]} s={[25.2, 0.1, 0.6]} m={m.coping} cast={false} />
+      <B p={[0, -0.07, -19.3]} s={[25.2, 0.1, 0.6]} m={m.coping} cast={false} />
+      <B p={[-12.3, -0.07, -16.5]} s={[0.6, 0.1, 5]} m={m.coping} cast={false} />
+      <B p={[12.3, -0.07, -16.5]} s={[0.6, 0.1, 5]} m={m.coping} cast={false} />
       <B p={[0, -0.6, -16.5]} s={[24, 1.0, 5]} m={m.liner} cast={false} />
-      <mesh ref={waterRef} position={[0, -0.09, -16.5]} rotation-x={-Math.PI / 2} material={m.water} receiveShadow>
+      <mesh ref={waterRef} position={[0, -0.07, -16.5]} rotation-x={-Math.PI / 2} material={m.water} receiveShadow>
         <planeGeometry args={[24, 5]} />
       </mesh>
       {[-6, 6].map((x) => (
