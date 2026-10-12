@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/site/Motion";
-import type { TourState } from "@/components/three/RealHouse";
+import type { TourState } from "@/components/three/VillaScene";
 
-const RealHouse = dynamic(() => import("@/components/three/RealHouse"), { ssr: false });
+const VillaScene = dynamic(() => import("@/components/three/VillaScene"), { ssr: false });
 
-// Fenêtres de défilement de chaque étape (identiques à TOUR_WINDOWS dans RealHouse.tsx).
+// Fenêtres de défilement de chaque étape (identiques à TOUR_WINDOWS dans VillaScene.tsx).
 const WINDOWS: [number, number][] = [
   [0.05, 0.15],
   [0.18, 0.34],
@@ -59,7 +59,7 @@ export function Tour() {
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {/* Scène 3D plein écran */}
         <div className="intro absolute inset-0" style={{ ["--d" as string]: 0 }}>
-          <RealHouse tour={tour} />
+          <VillaScene tour={tour} />
         </div>
         {/* Voiles pour fondre la scène dans la page */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bone/90 to-transparent sm:h-40" />

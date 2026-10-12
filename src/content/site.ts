@@ -270,7 +270,7 @@ export const faq = {
     },
     {
       q: "Combien coûte une intervention ?",
-      a: "Le conseil et l'assistance technique sont facturés 100 € HT de l'heure, avec un minimum d'une heure. Au-delà, le temps est décompté à la minute. Le déplacement en Île-de-France est de 50 € HT, offert à partir de 3 heures sur site.",
+      a: "Le conseil et l'assistance technique sont facturés 100 € HT de l'heure, avec un minimum d'une heure, puis 90 € HT de l'heure à partir de 3 heures d'intervention. Au-delà de la première heure, le temps est décompté à la minute. Le déplacement en Île-de-France est de 50 € HT, offert à partir de 2 heures sur site.",
     },
     {
       q: "Travaillez-vous avec les entreprises du bâtiment ?",
@@ -377,7 +377,7 @@ export const pricing = {
   meta: {
     title: "Tarifs",
     description:
-      "Conseil et assistance technique : 100 € HT de l'heure. Déplacement en Île-de-France : 50 € HT, offert dès 3 heures sur site.",
+      "Conseil et assistance technique : 100 € HT de l'heure, 90 € HT de l'heure dès 3 heures. Déplacement en Île-de-France : 50 € HT, offert dès 2 heures sur site.",
   },
   eyebrow: "Tarifs",
   title: "Des tarifs clairs",
@@ -386,6 +386,9 @@ export const pricing = {
   hourly: {
     label: "Conseil et assistance technique",
     price: 100,
+    reducedPrice: 90,
+    reducedFromHours: 3,
+    reducedNote: "90 € HT / heure à partir de 3 heures d'intervention",
     unit: "€ HT / heure",
     intro: "Ce tarif s'applique notamment aux prestations suivantes :",
     items: [
@@ -400,19 +403,21 @@ export const pricing = {
   travel: {
     label: "Déplacement en Île-de-France",
     price: 50,
+    freeFromHours: 2,
     unit: "€ HT par intervention",
-    note: "Le forfait de déplacement est offert à partir de 3 heures de présence sur site lors d'une même intervention.",
+    note: "Le forfait de déplacement est offert à partir de 2 heures de présence sur site lors d'une même intervention.",
   },
   minimum: {
     label: "Minimum de facturation",
     text: "Toute intervention est facturée sur une base minimale d'une heure, soit 100 € HT, hors déplacement lorsqu'il est facturable.",
-    detail: "Au-delà de la première heure, le temps supplémentaire est décompté à la minute, sur la base de 100 € HT pour 60 minutes, soit 1,6667 € HT par minute.",
+    detail: "Au-delà de la première heure, le temps supplémentaire est décompté à la minute, sur la base de 100 € HT pour 60 minutes, soit 1,6667 € HT par minute. À partir de 3 heures d'intervention, le taux horaire passe à 90 € HT, soit 1,50 € HT par minute.",
     examples: [
       { duration: "1 heure", price: "100 € HT" },
       { duration: "1 h 15", price: "125 € HT" },
       { duration: "1 h 30", price: "150 € HT" },
-      { duration: "2 heures", price: "200 € HT" },
-      { duration: "3 heures", price: "300 € HT, déplacement offert" },
+      { duration: "2 heures", price: "200 € HT, déplacement offert" },
+      { duration: "3 heures", price: "270 € HT (90 € HT / h), déplacement offert" },
+      { duration: "4 heures", price: "360 € HT (90 € HT / h), déplacement offert" },
     ],
   },
   calculator: {
@@ -510,6 +515,13 @@ export const legalNotice = {
       paragraphs: [
         "L'ensemble des contenus du site (textes, photographies, logo, éléments graphiques et animations) est la propriété de Baron Conseil Bâtiment ou de ses partenaires. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.",
         "La maison présentée en 3D sur la page d'accueil est une maquette d'illustration et ne représente pas le bien d'un client.",
+      ],
+    },
+    {
+      title: "Crédits 3D",
+      paragraphs: [
+        "Mobilier 3D : « Glam Velvet Sofa » et « Sheen Chair » © Wayfair LLC, licence CC BY 4.0 ; « Diffuse Transmission Plant » © 2024 Darmstadt Graphics Group, licence CC BY 4.0 (modèles d'exemple Khronos glTF).",
+        "Textures et éclairage : exemples three.js et Poly Haven (licence CC0).",
       ],
     },
     {

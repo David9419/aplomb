@@ -32,6 +32,9 @@ export default function TarifsPage() {
                 <CountUp to={hourly.price} className="text-[clamp(5rem,12vw,8.5rem)] font-medium leading-[0.85] tracking-[-0.05em] tabular-nums" />
                 <span className="pb-2 font-serif text-[clamp(1.4rem,2.6vw,2rem)] italic text-steel">{hourly.unit}</span>
               </p>
+              <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-steel/10 px-3.5 py-1.5 text-[0.9rem] font-medium text-steel">
+                <Clock className="size-4" strokeWidth={1.8} /> {hourly.reducedNote}
+              </p>
               <p className="mt-10 text-[1rem] text-ink-2">{hourly.intro}</p>
               <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                 {hourly.items.map((item) => (

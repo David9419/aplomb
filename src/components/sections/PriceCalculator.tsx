@@ -8,15 +8,22 @@ import { pricing } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 const HOURLY = pricing.hourly.price;
+const REDUCED = pricing.hourly.reducedPrice;
+const REDUCED_FROM = pricing.hourly.reducedFromHours * 60;
 const TRAVEL = pricing.travel.price;
+const TRAVEL_FREE_FROM = pricing.travel.freeFromHours * 60;
 
-/** Règles du client : minimum 1 h, puis décompte à la minute ; déplacement offert dès 3 h sur site. */
+/**
+ * Règles du client : minimum 1 h, puis décompte à la minute ;
+ * 90 € HT / h pour toute intervention de 3 h ou plus ; déplacement offert dès 2 h sur site.
+ */
 export function computePrice(minutes: number, withTravel: boolean) {
   const billedMinutes = Math.max(60, minutes);
-  const labour = Math.round(((billedMinutes * HOURLY) / 60) * 100) / 100;
-  const travelOffered = minutes >= 180;
+  const rate = minutes >= REDUCED_FROM ? REDUCED : HOURLY;
+  const labour = Math.round(((billedMinutes * rate) / 60) * 100) / 100;
+  const travelOffered = minutes >= TRAVEL_FREE_FROM;
   const travel = withTravel && !travelOffered ? TRAVEL : 0;
-  return { labour, travel, travelOffered, total: Math.round((labour + travel) * 100) / 100 };
+  return { labour, rate, travel, travelOffered, total: Math.round((labour + travel) * 100) / 100 };
 }
 
 const euro = (v: number) =>
@@ -59,10 +66,22 @@ export function PriceCalculator() {
           className="mt-5 h-2 w-full cursor-pointer appearance-none rounded-full bg-paper/15 accent-mist [&::-webkit-slider-thumb]:size-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-ink [&::-webkit-slider-thumb]:bg-paper [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_#c9d3dc]"
           style={{ background: `linear-gradient(90deg, #c9d3dc ${pct}%, rgba(251,250,247,0.15) ${pct}%)` }}
         />
-        <div className="mt-2 flex justify-between font-mono text-[0.62rem] text-mist/50">
-          <span>15 min</span>
-          <span>3 h</span>
-          <span>8 h</span>
+        {/* repères placés à leur vraie position sur le curseur */}
+        <div className="relative mt-2 h-8 font-mono text-[0.6rem] leading-tight text-mist/55">
+          {[
+            { m: 15, l: "15 min" },
+            { m: 120, l: "2 h\ndépl. offert" },
+            { m: 180, l: "3 h\n90 € / h" },
+            { m: 480, l: "8 h" },
+          ].map(({ m, l }, i, all) => (
+            <span
+              key={m}
+              className={cn("absolute top-0 whitespace-pre", i === 0 ? "" : i === all.length - 1 ? "-translate-x-full text-right" : "-translate-x-1/2 text-center")}
+              style={{ left: `${((m - 15) / (480 - 15)) * 100}%` }}
+            >
+              {l}
+            </span>
+          ))}
         </div>
 
         <button
@@ -87,14 +106,14 @@ export function PriceCalculator() {
         <dl className="mt-8 grid gap-3 border-t border-paper/10 pt-6 text-[0.98rem]">
           <div className="flex justify-between gap-4">
             <dt className="text-mist/75">
-              Intervention{minutes < 60 ? " (minimum 1 h)" : ""}
+              Intervention{minutes < 60 ? " (minimum 1 h)" : ""} · {r.rate} € HT / h
             </dt>
             <dd className="tabular-nums">{euro(r.labour)}</dd>
           </div>
           {withTravel && (
             <div className="flex justify-between gap-4">
               <dt className="text-mist/75">Déplacement</dt>
-              <dd className="tabular-nums">{r.travelOffered ? <span className="text-mist">Offert (3 h et plus)</span> : euro(r.travel)}</dd>
+              <dd className="tabular-nums">{r.travelOffered ? <span className="text-mist">Offert (2 h et plus)</span> : euro(r.travel)}</dd>
             </div>
           )}
         </dl>
