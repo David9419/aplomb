@@ -74,14 +74,19 @@ function ViewImage({ view, index, progress }: { view: (typeof TOUR_VIEWS)[number
 
 function Labels({ view, progress, variant }: { view: (typeof TOUR_VIEWS)[number]; progress: MotionValue<number>; variant: "wide" | "tall" }) {
   const pts = PTS[view.key]?.[variant] ?? {};
-  const items = intro.labels[view.key].filter(({ id }) => {
-    const p = pts[id];
-    return p && p[2] > 0 && p[0] > 4 && p[0] < 96 && p[1] > 8 && p[1] < 92;
-  });
+  const tall = variant === "tall";
+  const items = intro.labels[view.key]
+    .filter(({ id }) => {
+      const p = pts[id];
+      if (!p || p[2] <= 0 || p[0] < 6 || p[0] > 94 || p[1] < 9 || p[1] > 90) return false;
+      // ordinateur : rien sous le panneau de texte (à gauche) ; téléphone : rien sous le panneau du bas
+      return tall ? p[1] < 62 : !(p[0] < 40 && p[1] > 26 && p[1] < 76);
+    })
+    .slice(0, tall ? 3 : 6);
   return (
     <div className={variant === "wide" ? "tour-wide" : "tour-tall"} aria-hidden>
       {items.map((item, i) => (
-        <Label key={item.id} item={item} at={pts[item.id]} index={i} win={view.win} progress={progress} />
+        <Label key={item.id} item={item} at={pts[item.id]} index={i} win={view.win} progress={progress} flipAt={tall ? 50 : 66} />
       ))}
     </div>
   );
@@ -93,18 +98,21 @@ function Label({
   index,
   win,
   progress,
+  flipAt,
 }: {
   item: { title: string; value: string };
   at: Pt;
   index: number;
   win: [number, number];
   progress: MotionValue<number>;
+  flipAt: number;
 }) {
-  const a = win[0] + 0.012 + index * 0.009;
   const b = win[1] - 0.012;
+  // apparition échelonnée, sans jamais dépasser le début de la disparition
+  const a = Math.min(win[0] + 0.012 + index * 0.008, b - 0.04);
   const opacity = useTransform(progress, [a, a + 0.02, b - 0.015, b], [0, 1, 1, 0]);
   const y = useTransform(progress, [a, a + 0.02], [10, 0]);
-  const left = at[0] > 66;
+  const left = at[0] > flipAt;
   return (
     <motion.div className="absolute" style={{ left: `${at[0]}%`, top: `${at[1]}%`, opacity }}>
       <span className="absolute -translate-x-1/2 -translate-y-1/2">
