@@ -34,7 +34,13 @@ export function Footer() {
         <Separator className="mt-14" />
         <div className="flex flex-wrap justify-between gap-3 py-6 text-[0.85rem] text-stone">
           <span>{footer.copyright}</span>
-          <span>{footer.legal}</span>
+          <span className="flex gap-5">
+            {footer.links.map((l) => (
+              <NavLink key={l.href} href={l.href} className="transition-colors hover:text-steel">
+                {l.label}
+              </NavLink>
+            ))}
+          </span>
         </div>
       </div>
       <p

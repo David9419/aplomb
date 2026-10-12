@@ -130,6 +130,13 @@ html[data-ready] .word > span {
   transition-delay: calc(var(--d, 0) * 1ms);
 }
 
+/* Colonnes de photos défilantes : pause au survol */
+@keyframes column-up { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+@keyframes column-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+.column-track { animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
+.columns:hover .column-track { animation-play-state: paused; }
+.fade-y { mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); }
+
 /* Bords fondus du bandeau défilant */
 .fade-x { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 

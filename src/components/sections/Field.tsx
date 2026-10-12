@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 
@@ -14,67 +14,96 @@ import { Reveal } from "@/components/site/Motion";
 type Photo = (typeof field.photos)[number];
 const isLandscape = (p: Photo) => p.width > p.height;
 
+// Trois colonnes qui défilent à l'infini : gauche vers le bas, milieu vers le haut, droite vers le bas.
+// Chaque colonne commence à une photo différente pour ne jamais montrer la même image côte à côte.
+const COLUMNS = [
+  { dir: "down" as const, offset: 0, duration: 46 },
+  { dir: "up" as const, offset: 2, duration: 38 },
+  { dir: "down" as const, offset: 4, duration: 52 },
+];
+
 /**
- * Galerie de chantiers : mosaïque (paysages sur 2 colonnes, portraits sur 1),
- * image en léger parallaxe, et visionneuse plein écran au clic (flèches, clavier, glisser).
+ * Galerie de chantiers : trois colonnes de photos en défilement continu (pause au survol),
+ * et visionneuse plein écran au clic (flèches, clavier, glisser).
  */
 export function Field() {
   const [open, setOpen] = useState<number | null>(null);
   const photos = field.photos;
 
   return (
-    <section id="terrain" className="relative py-28 sm:py-36">
+    <section id="terrain" className="relative overflow-hidden py-28 sm:py-36">
       <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
         <SectionHead index="03" eyebrow={field.eyebrow} title={field.title} accent={["concrets."]} lead={field.lead} />
-        <div className="mt-16 grid grid-flow-row-dense grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {photos.map((photo, i) => (
-            <Tile key={photo.src} photo={photo} index={i} onOpen={() => setOpen(i)} />
-          ))}
-        </div>
+        <Reveal from="zoom" className="mt-16">
+          <div className="columns fade-y relative grid h-[560px] grid-cols-3 gap-2.5 overflow-hidden sm:h-[720px] sm:gap-4 lg:h-[820px]">
+            {COLUMNS.map((col, c) => {
+              const shifted = photos.map((_, i) => photos[(i + col.offset) % photos.length]);
+              // La colonne du milieu défile dans l'ordre inverse : jamais deux photos identiques côte à côte.
+              const ordered = col.dir === "up" ? [...shifted].reverse() : shifted;
+              const track = [...ordered, ...ordered];
+              return (
+                <div key={c} className="relative min-w-0 overflow-hidden">
+                  <div
+                    className="column-track flex flex-col"
+                    style={{
+                      animationName: col.dir === "up" ? "column-up" : "column-down",
+                      animationDuration: `${col.duration}s`,
+                    }}
+                  >
+                    {track.map((photo, k) => (
+                      <Tile
+                        key={`${photo.src}-${k}`}
+                        photo={photo}
+                        hidden={k >= ordered.length}
+                        onOpen={() => setOpen(photos.indexOf(photo))}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Reveal>
       </div>
       <Lightbox photos={photos} index={open} onChange={setOpen} />
     </section>
   );
 }
 
-function Tile({ photo, index, onOpen }: { photo: Photo; index: number; onOpen: () => void }) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+function Tile({ photo, hidden, onOpen }: { photo: Photo; hidden: boolean; onOpen: () => void }) {
   const landscape = isLandscape(photo);
-
   return (
-    <Reveal from="zoom" delay={(index % 3) * 0.08} className={cn(landscape ? "col-span-2" : "col-span-1")}>
-      <button
-        ref={ref}
-        type="button"
-        onClick={onOpen}
-        aria-label={`Agrandir la photo : ${photo.caption}`}
-        className="group relative block h-[240px] w-full cursor-zoom-in overflow-hidden rounded-[24px] bg-sand text-left sm:h-[340px] lg:h-[420px]"
-      >
-        <motion.div className="absolute -inset-y-[7%] inset-x-0" style={{ y }}>
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            fill
-            sizes={landscape ? "(min-width: 1024px) 620px, 100vw" : "(min-width: 1024px) 310px, 50vw"}
-            className="object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.05]"
-          />
-        </motion.div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-ink/0 opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
-        <span className="absolute top-3 right-3 grid size-9 scale-75 place-items-center rounded-full bg-paper/90 text-ink opacity-0 backdrop-blur-md transition-all duration-500 ease-out-expo group-hover:scale-100 group-hover:opacity-100">
-          <Expand className="size-4" />
+    <button
+      type="button"
+      onClick={onOpen}
+      tabIndex={hidden ? -1 : 0}
+      aria-hidden={hidden || undefined}
+      aria-label={`Agrandir la photo : ${photo.caption}`}
+      className={cn(
+        "group relative mb-2.5 block w-full shrink-0 cursor-zoom-in overflow-hidden rounded-[18px] bg-sand text-left sm:mb-4 sm:rounded-[24px]",
+        landscape ? "aspect-[4/3]" : "aspect-[3/4]",
+      )}
+    >
+      <Image
+        src={photo.src}
+        alt={hidden ? "" : photo.alt}
+        fill
+        sizes="(min-width: 1024px) 400px, 33vw"
+        className="object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.06]"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-ink/0 opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+      <span className="absolute top-3 right-3 hidden size-9 scale-75 place-items-center rounded-full bg-paper/90 text-ink opacity-0 backdrop-blur-md transition-all duration-500 ease-out-expo group-hover:scale-100 group-hover:opacity-100 sm:grid">
+        <Expand className="size-4" />
+      </span>
+      <span className="absolute right-2 bottom-2 left-2 flex flex-col items-start gap-1.5 sm:right-4 sm:bottom-4 sm:left-4">
+        <span className="max-w-full truncate rounded-full bg-paper/90 px-2.5 py-1 text-[0.7rem] font-medium text-ink backdrop-blur-md sm:px-3 sm:text-[0.85rem]">
+          {photo.caption}
         </span>
-        <span className="absolute right-3 bottom-3 left-3 flex flex-col items-start gap-1.5 sm:right-4 sm:bottom-4 sm:left-4">
-          <span className="rounded-full bg-paper/90 px-3 py-1 text-[0.8rem] font-medium text-ink backdrop-blur-md sm:text-[0.85rem]">
-            {photo.caption}
-          </span>
-          <span className="hidden translate-y-2 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-paper opacity-0 transition-all duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100 sm:block">
-            {photo.detail}
-          </span>
+        <span className="hidden translate-y-2 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-paper opacity-0 transition-all duration-500 ease-out-expo group-hover:translate-y-0 group-hover:opacity-100 lg:block">
+          {photo.detail}
         </span>
-      </button>
-    </Reveal>
+      </span>
+    </button>
   );
 }
 

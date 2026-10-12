@@ -3,7 +3,7 @@ import { marquee } from "@/content/site";
 export function Marquee() {
   const items = [...marquee, ...marquee];
   return (
-    <div className="relative z-10 -rotate-[1.2deg] bg-ink py-5 text-paper shadow-[0_30px_60px_-30px_rgba(15,18,21,0.6)]" aria-hidden>
+    <div className="relative z-10 bg-ink py-5 text-paper shadow-[0_30px_60px_-30px_rgba(15,18,21,0.6)]" aria-hidden>
       <div className="fade-x overflow-hidden">
         <div className="flex w-max animate-marquee items-center hover:[animation-play-state:paused]">
           {items.map((t, i) => (

@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <ScrollProgress />
         <Header />
-        <main>{children}</main>
+        <main className="overflow-x-clip">{children}</main>
         <Footer />
         <CallFloat />
         <div className="grain" aria-hidden />

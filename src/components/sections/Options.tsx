@@ -12,7 +12,7 @@ const ICONS = [Users, Hammer];
 /** Les deux façons de travailler : accompagnement ou réalisation. */
 export function Options() {
   return (
-    <section id="possibilites" className="relative py-28 sm:py-36">
+    <section id="possibilites" className="relative overflow-x-clip py-28 sm:py-36">
       <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
         <SectionHead index="01" eyebrow={options.eyebrow} title={options.title} accent={["selon", "votre", "projet."]} lead={options.lead} />
         <div className="mt-16 grid gap-4 md:grid-cols-2">

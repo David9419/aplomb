@@ -10,16 +10,17 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/site/Motion";
-import type { TourState } from "@/components/three/HouseScene";
+import type { TourState } from "@/components/three/RealHouse";
 
-const HouseScene = dynamic(() => import("@/components/three/HouseScene"), { ssr: false });
+const RealHouse = dynamic(() => import("@/components/three/RealHouse"), { ssr: false });
 
-// Fenêtres de défilement de chaque étape (doivent correspondre à la caméra de HouseScene).
+// Fenêtres de défilement de chaque étape (identiques à TOUR_WINDOWS dans RealHouse.tsx).
 const WINDOWS: [number, number][] = [
-  [0.14, 0.34],
-  [0.39, 0.56],
-  [0.59, 0.74],
-  [0.79, 0.95],
+  [0.05, 0.15],
+  [0.18, 0.34],
+  [0.4, 0.53],
+  [0.57, 0.69],
+  [0.79, 0.94],
 ];
 
 function Words({ text, start, className }: { text: string; start: number; className?: string }) {
@@ -45,26 +46,35 @@ export function Tour() {
     tour.current.progress = v;
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.07], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.07], [0, -60]);
-  const heroBlur = useTransform(scrollYProgress, [0, 0.07], ["blur(0px)", "blur(8px)"]);
-  const railOpacity = useTransform(scrollYProgress, [0.1, 0.14, 0.95, 0.97], [0, 1, 1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.045], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.045], [0, -60]);
+  const heroBlur = useTransform(scrollYProgress, [0, 0.045], ["blur(0px)", "blur(8px)"]);
+  const railOpacity = useTransform(scrollYProgress, [0.04, 0.07, 0.95, 0.97], [0, 1, 1, 0]);
   const outroOpacity = useTransform(scrollYProgress, [0.955, 0.99], [0, 1]);
   const outroY = useTransform(scrollYProgress, [0.955, 0.99], [30, 0]);
   const veil = useTransform(scrollYProgress, [0.94, 1], [0, 0.7]);
 
   return (
-    <section id="accueil" ref={section} className="relative h-[620vh]">
+    <section id="accueil" ref={section} className="relative h-[760vh]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {/* Scène 3D plein écran */}
         <div className="intro absolute inset-0" style={{ ["--d" as string]: 0 }}>
-          <HouseScene tour={tour} />
+          <RealHouse tour={tour} />
         </div>
         {/* Voiles pour fondre la scène dans la page */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bone/90 to-transparent sm:h-40" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bone to-transparent" />
         <motion.div className="pointer-events-none absolute inset-0 bg-bone" style={{ opacity: veil }} />
 
+        {/* Voile clair derrière le titre (ordinateur) pour que le texte reste lisible sur la maquette */}
+        <motion.div
+          className="pointer-events-none absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-bone via-bone/75 to-transparent sm:block"
+          style={{ opacity: heroOpacity }}
+        />
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-bone via-bone/80 to-transparent sm:hidden"
+          style={{ opacity: heroOpacity }}
+        />
         {/* ----- Accueil ----- */}
         <motion.div
           className="absolute inset-0 flex items-end pb-[14svh] sm:items-center sm:pb-0"
@@ -135,7 +145,7 @@ export function Tour() {
           className="absolute bottom-6 left-5 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-stone sm:left-8"
           style={{ opacity: railOpacity }}
         >
-          {intro.note} · 12 × 8 m
+          {intro.note}
         </motion.p>
 
         {/* ----- Fin de la visite ----- */}

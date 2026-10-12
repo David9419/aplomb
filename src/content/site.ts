@@ -47,11 +47,19 @@ export const hero = {
 // La maison est un plan d'illustration (pas le bien d'un client).
 export const intro = {
   scrollHint: "Faites défiler pour visiter",
-  note: "Maquette d'illustration",
+  note: "Maquette d'illustration · 135 m²",
   steps: [
     {
-      key: "plan",
+      key: "facades",
       index: "01",
+      label: "Les façades",
+      title: "Menuiseries, façades,",
+      accent: "toiture.",
+      text: "Titulaire d'un diplôme d'État de poseur-installateur en menuiserie extérieure, je connais l'enveloppe du bâtiment dans le détail.",
+    },
+    {
+      key: "plan",
+      index: "02",
       label: "Le plan",
       title: "Prises de cotes,",
       accent: "agencement.",
@@ -59,7 +67,7 @@ export const intro = {
     },
     {
       key: "sejour",
-      index: "02",
+      index: "03",
       label: "Le séjour",
       title: "Les bons choix,",
       accent: "au bon moment.",
@@ -67,7 +75,7 @@ export const intro = {
     },
     {
       key: "cuisine",
-      index: "03",
+      index: "04",
       label: "La cuisine",
       title: "Les mesures",
       accent: "justes.",
@@ -75,9 +83,9 @@ export const intro = {
     },
     {
       key: "structure",
-      index: "04",
+      index: "05",
       label: "Du sol au toit",
-      title: "Un problème ?",
+      title: "Un problème\u00a0?",
       accent: "Une solution.",
       text: "Un imprévu ou une difficulté de mise en œuvre : j'analyse la situation et recherche une solution dans le respect des règles de l'art.",
     },
@@ -447,8 +455,146 @@ export const pricing = {
   },
 };
 
+/* ========================================================================== */
+/*  PAGES LÉGALES                                                              */
+/*  Les éléments entre crochets [ … ] sont à fournir par le client.           */
+/* ========================================================================== */
+
+export const legalNotice = {
+  meta: { title: "Mentions légales", description: "Mentions légales du site Baron Conseil Bâtiment." },
+  eyebrow: "Informations légales",
+  title: "Mentions",
+  titleAccent: "légales.",
+  updated: "Dernière mise à jour : octobre 2026",
+  sections: [
+    {
+      title: "Éditeur du site",
+      paragraphs: [
+        "Le présent site est édité par Baron Conseil Bâtiment, [forme juridique : entreprise individuelle, SASU…], représentée par [nom et prénom du dirigeant].",
+        "SIRET : [numéro SIRET]. Numéro de TVA intracommunautaire : [numéro de TVA, le cas échéant].",
+        "Adresse : [adresse postale complète].",
+        "Téléphone : 07 44 98 17 75. E-mail : [adresse e-mail].",
+      ],
+    },
+    {
+      title: "Directeur de la publication",
+      paragraphs: ["[Nom et prénom du dirigeant], en qualité de [fonction]."],
+    },
+    {
+      title: "Hébergement",
+      paragraphs: [
+        "Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis — vercel.com.",
+      ],
+    },
+    {
+      title: "Assurance professionnelle",
+      paragraphs: [
+        "Assurance responsabilité civile professionnelle : [compagnie et numéro de contrat].",
+        "Pour les travaux réalisés, assurance de responsabilité décennale : [compagnie, numéro de contrat et couverture géographique].",
+      ],
+    },
+    {
+      title: "Médiation de la consommation",
+      paragraphs: [
+        "Conformément au Code de la consommation, le client particulier peut recourir gratuitement à un médiateur de la consommation en cas de litige : [nom et coordonnées du médiateur].",
+      ],
+    },
+    {
+      title: "Tarifs",
+      paragraphs: [
+        "Les tarifs indiqués sur le site sont exprimés hors taxes et donnés à titre informatif. Seuls le devis ou l'accord préalable établis pour chaque mission font foi.",
+      ],
+    },
+    {
+      title: "Propriété intellectuelle",
+      paragraphs: [
+        "L'ensemble des contenus du site (textes, photographies, logo, éléments graphiques et animations) est la propriété de Baron Conseil Bâtiment ou de ses partenaires. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.",
+        "La maison présentée en 3D sur la page d'accueil est une maquette d'illustration et ne représente pas le bien d'un client.",
+      ],
+    },
+    {
+      title: "Responsabilité",
+      paragraphs: [
+        "Les informations publiées sur le site sont fournies à titre indicatif. Baron Conseil Bâtiment s'efforce de les tenir à jour, sans pouvoir garantir l'absence d'erreur ou d'omission. Elles ne remplacent pas une visite sur site ni un avis rendu dans le cadre d'une mission.",
+      ],
+    },
+    {
+      title: "Données personnelles",
+      paragraphs: [
+        "Le traitement des données personnelles est décrit dans la politique de confidentialité, accessible depuis le pied de page du site.",
+      ],
+    },
+  ],
+};
+
+export const privacy = {
+  meta: {
+    title: "Politique de confidentialité",
+    description: "Comment Baron Conseil Bâtiment traite vos données personnelles.",
+  },
+  eyebrow: "Données personnelles",
+  title: "Politique de",
+  titleAccent: "confidentialité.",
+  updated: "Dernière mise à jour : octobre 2026",
+  sections: [
+    {
+      title: "Responsable du traitement",
+      paragraphs: [
+        "Baron Conseil Bâtiment, représentée par [nom et prénom du dirigeant], [adresse postale]. Contact : 07 44 98 17 75 — [adresse e-mail].",
+      ],
+    },
+    {
+      title: "Données collectées",
+      paragraphs: [
+        "Le site ne comporte ni formulaire, ni espace client, ni outil de mesure d'audience. Aucune donnée personnelle n'est collectée lors de la simple consultation des pages.",
+        "Lorsque vous me contactez par téléphone ou par SMS, je recueille uniquement les informations que vous me communiquez : nom, numéro de téléphone, adresse du chantier et description de votre projet.",
+      ],
+    },
+    {
+      title: "Finalités et bases légales",
+      paragraphs: [
+        "Ces données servent à répondre à votre demande, à préparer une proposition ou un devis, puis à réaliser et facturer la mission. Ce traitement repose sur l'exécution de mesures précontractuelles et du contrat, ainsi que sur le respect des obligations légales, notamment comptables.",
+      ],
+    },
+    {
+      title: "Durée de conservation",
+      paragraphs: [
+        "Les données d'un contact sans suite sont conservées au maximum 3 ans après le dernier échange. Les données clients sont conservées pendant la durée de la relation, puis archivées le temps imposé par la loi (10 ans pour les pièces comptables).",
+      ],
+    },
+    {
+      title: "Destinataires",
+      paragraphs: [
+        "Vos données sont destinées uniquement à Baron Conseil Bâtiment. Elles ne sont ni vendues, ni louées, ni cédées à des tiers.",
+      ],
+    },
+    {
+      title: "Hébergement et journaux techniques",
+      paragraphs: [
+        "Comme tout site internet, l'hébergeur (Vercel Inc.) enregistre des journaux techniques, dont l'adresse IP, pour assurer la sécurité et le bon fonctionnement du service. Ces données peuvent être traitées hors de l'Union européenne, dans le cadre de garanties appropriées (clauses contractuelles types de la Commission européenne).",
+      ],
+    },
+    {
+      title: "Cookies",
+      paragraphs: [
+        "Le site n'utilise aucun cookie publicitaire ni de mesure d'audience. Les polices de caractères sont hébergées directement sur le site : aucune connexion à un service tiers n'est effectuée lors de votre visite.",
+      ],
+    },
+    {
+      title: "Vos droits",
+      paragraphs: [
+        "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Pour les exercer, contactez-moi au 07 44 98 17 75 ou à [adresse e-mail].",
+        "Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (www.cnil.fr).",
+      ],
+    },
+  ],
+};
+
 export const footer = {
   copyright: "© 2026 Baron Conseil Bâtiment. Tous droits réservés.",
   tagline: "Conseil, accompagnement et réalisation de travaux.",
-  legal: "Mentions légales", // TODO : page à créer (SIRET, assurance, hébergeur)
+  links: [
+    { label: "Mentions légales", href: "/mentions-legales" },
+    { label: "Confidentialité", href: "/confidentialite" },
+  ],
 };
