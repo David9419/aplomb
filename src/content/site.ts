@@ -47,7 +47,7 @@ export const hero = {
 // La maison est un plan d'illustration (pas le bien d'un client).
 export const intro = {
   scrollHint: "Faites défiler pour visiter",
-  note: "Maquette d'illustration · 135 m²",
+  note: "Maquette d'illustration · villa contemporaine",
   steps: [
     {
       key: "facades",
