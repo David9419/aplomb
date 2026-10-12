@@ -1,96 +1,39 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { ClipboardCheck, HardHat, Ruler, ScanSearch } from "lucide-react";
+import { ClipboardCheck, ClipboardList, Hammer, Lightbulb, Ruler, Wrench } from "lucide-react";
 
 import { services } from "@/content/site";
 import { SectionHead } from "@/components/sections/SectionHead";
-import { Badge } from "@/components/ui/badge";
+import { Reveal, TiltCard } from "@/components/site/Motion";
 
-const ICONS = [Ruler, ScanSearch, HardHat, ClipboardCheck];
-const TONES = ["bg-paper", "bg-[#f6f2ea]", "bg-[#eef1f3]", "bg-[#f1ece3]"];
+const ICONS = [Lightbulb, ClipboardList, Wrench, Hammer, Ruler, ClipboardCheck];
 
-/** Cartes qui s'empilent au défilement (chaque carte se fige puis rétrécit sous la suivante). */
+/** Les six prestations, en cartes qui s'inclinent sous la souris. */
 export function Services() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const n = services.items.length;
-
   return (
-    <section id="prestations" className="relative py-28 sm:py-36">
-      <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
-        <SectionHead
-          index="01"
-          eyebrow={services.eyebrow}
-          title={services.title}
-          accent={["sain", "bien", "construit."]}
-          lead={services.lead}
-        />
-        <div ref={ref} className="relative mt-16 sm:mt-20">
-          {services.items.map((s, i) => (
-            <StackCard key={s.ref} i={i} n={n} progress={scrollYProgress}>
-              <article
-                className={`grid gap-8 overflow-hidden rounded-[32px] border border-ink/[0.08] p-7 shadow-[0_40px_80px_-50px_rgba(15,18,21,0.5)] sm:p-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 ${TONES[i]}`}
-              >
-                <div className="flex flex-col justify-between gap-10">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="steel">{s.ref}</Badge>
-                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-stone">{s.tag}</span>
+    <section id="prestations" className="relative overflow-hidden bg-ink py-28 text-paper sm:py-36">
+      <div className="blueprint-dark absolute inset-0 [mask-image:linear-gradient(180deg,transparent,#000_25%,#000_75%,transparent)]" />
+      <div className="absolute top-1/4 -left-40 size-[620px] rounded-full bg-[radial-gradient(circle,rgba(62,91,116,0.45),transparent_65%)]" />
+      <div className="relative mx-auto max-w-[1240px] px-5 sm:px-8">
+        <SectionHead index="02" eyebrow={services.eyebrow} title={services.title} accent={["projets", "de", "travaux."]} lead={services.lead} dark />
+        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {services.items.map((s, i) => {
+            const Icon = ICONS[i];
+            return (
+              <Reveal key={s.title} delay={(i % 3) * 0.08}>
+                <TiltCard className="group flex h-full flex-col rounded-[26px] border border-paper/10 bg-paper/[0.035] p-7 transition-colors duration-500 hover:border-mist/30 sm:p-8 [&::before]:bg-[radial-gradient(380px_circle_at_var(--mx,50%)_var(--my,50%),rgba(143,178,201,0.18),transparent_65%)]">
+                  <div className="flex items-start justify-between [transform:translateZ(30px)]">
+                    <span className="grid size-12 place-items-center rounded-xl border border-paper/10 bg-paper/5 text-mist transition-[background-color,color] duration-500 group-hover:bg-mist group-hover:text-ink">
+                      <Icon className="size-5" strokeWidth={1.5} />
+                    </span>
+                    <span className="font-mono text-[0.7rem] text-mist/50">{String(i + 1).padStart(2, "0")}</span>
                   </div>
-                  <div>
-                    <IconTile i={i} />
-                    <h3 className="mt-8 text-[clamp(2rem,4vw,3.3rem)] font-medium leading-[1] tracking-[-0.03em]">
-                      {s.title}
-                    </h3>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-between gap-8">
-                  <p className="font-serif text-[clamp(1.4rem,2.4vw,1.9rem)] leading-[1.25] text-ink">{s.text}</p>
-                  <ul className="divide-y divide-ink/10 border-y border-ink/10">
-                    {s.points.map((p, k) => (
-                      <li key={p} className="flex items-center gap-4 py-4 text-[1rem] text-ink-2">
-                        <span className="font-mono text-[0.7rem] text-steel">0{k + 1}</span>
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            </StackCard>
-          ))}
+                  <h3 className="mt-10 text-[1.5rem] font-medium leading-[1.15] tracking-[-0.02em] [transform:translateZ(40px)]">{s.title}</h3>
+                  <p className="mt-4 text-[0.98rem] leading-[1.7] text-mist/70 [transform:translateZ(20px)]">{s.text}</p>
+                </TiltCard>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
-  );
-}
-
-function IconTile({ i }: { i: number }) {
-  const Icon = ICONS[i];
-  return (
-    <span className="grid size-16 place-items-center rounded-2xl bg-ink text-paper shadow-[0_14px_30px_-14px_rgba(15,18,21,0.6)]">
-      <Icon className="size-7" strokeWidth={1.4} />
-    </span>
-  );
-}
-
-function StackCard({
-  i,
-  n,
-  progress,
-  children,
-}: {
-  i: number;
-  n: number;
-  progress: MotionValue<number>;
-  children: React.ReactNode;
-}) {
-  const start = i / n;
-  const scale = useTransform(progress, [start, 1], [1, 1 - (n - 1 - i) * 0.045]);
-  const opacity = useTransform(progress, [start + 0.15, 1], [1, i === n - 1 ? 1 : 0.55]);
-  return (
-    <div className="sticky mb-8 last:mb-0" style={{ top: `calc(100px + ${i * 22}px)` }}>
-      <motion.div style={{ scale, opacity, transformOrigin: "top center" }}>{children}</motion.div>
-    </div>
   );
 }

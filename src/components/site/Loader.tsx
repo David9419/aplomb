@@ -79,7 +79,7 @@ export function Loader() {
               />
             </motion.svg>
             <div className="mt-8 flex overflow-hidden text-[1.6rem] font-semibold uppercase tracking-[0.5em]">
-              {"Aplomb".split("").map((l, i) => (
+              {"Baron".split("").map((l, i) => (
                 <motion.span
                   key={i}
                   initial={{ y: "110%" }}
@@ -96,7 +96,7 @@ export function Loader() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.8 }}
             >
-              Conseil & expertise bâtiment
+              Conseil bâtiment
             </motion.p>
             <div className="mt-10 h-px w-44 overflow-hidden bg-paper/10">
               <motion.div

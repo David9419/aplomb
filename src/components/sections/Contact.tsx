@@ -8,7 +8,15 @@ import { contact, contactSection } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { Magnetic, Reveal, SplitHeading } from "@/components/site/Motion";
 
-export function Contact() {
+export function Contact({
+  title = contactSection.title,
+  lead = contactSection.lead,
+  accent = ["projet."],
+}: {
+  title?: string;
+  lead?: string;
+  accent?: string[];
+}) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -31,12 +39,12 @@ export function Contact() {
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-mist/70">{contactSection.eyebrow}</p>
           </Reveal>
           <SplitHeading
-            text={contactSection.title}
-            accent={["bâtiment."]}
+            text={title}
+            accent={accent}
             className="mt-6 text-[clamp(2.6rem,7vw,6rem)] font-medium leading-[0.98] tracking-[-0.04em] [&_.text-steel]:text-mist"
           />
           <Reveal delay={0.1}>
-            <p className="mx-auto mt-7 max-w-[36rem] text-[1.08rem] leading-[1.7] text-mist/75">{contactSection.lead}</p>
+            <p className="mx-auto mt-7 max-w-[36rem] text-[1.08rem] leading-[1.7] text-mist/75">{lead}</p>
           </Reveal>
 
           <Reveal delay={0.2}>

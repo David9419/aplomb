@@ -1,13 +1,15 @@
-// Source unique de tous les textes du site Aplomb.
-// Pour modifier un texte, un numéro ou une prestation : c'est ici, et nulle part ailleurs.
+// Source unique de tous les textes du site Baron Conseil Bâtiment.
+// Les textes viennent du client (accueil, expérience, tarifs) et sont repris mot pour mot.
+// Pour modifier un texte, un prix ou le numéro : c'est ici, et nulle part ailleurs.
 
 export const site = {
-  name: "Aplomb",
-  baseline: "Conseil & expertise bâtiment",
-  title: "Aplomb — Conseil & expertise bâtiment à Paris et en Île-de-France",
+  name: "Baron Conseil Bâtiment",
+  shortName: "Baron",
+  baseline: "Conseil bâtiment",
+  title: "Baron Conseil Bâtiment — Conseil technique, suivi de chantier et travaux en Île-de-France",
   description:
-    "Conseil technique, diagnostic des pathologies du bâtiment et suivi de chantier à Paris et en Île-de-France : 92, 93, 94, 95 et 91. Un expert indépendant qui ne réalise aucuns travaux.",
-  url: "https://www.aplomb-conseil.fr", // TODO : domaine définitif à acheter
+    "Conseil technique, suivi de chantier, construction, rénovation et réalisation de travaux à Paris et en Île-de-France. L'expérience du terrain depuis 2005.",
+  url: "https://www.baron-conseil-batiment.fr", // TODO : domaine définitif à acheter
 };
 
 export const contact = {
@@ -15,37 +17,30 @@ export const contact = {
   phoneHref: "tel:+33744981775",
   smsHref:
     "sms:+33744981775?&body=" +
-    encodeURIComponent("Bonjour, je souhaite un avis sur mon bâtiment : "),
+    encodeURIComponent("Bonjour, je vous contacte au sujet de mon projet : "),
   email: "", // TODO : adresse e-mail du client
 };
 
 export const nav = [
-  { label: "Prestations", href: "#prestations" },
-  { label: "Pathologies", href: "#pathologies" },
-  { label: "Méthode", href: "#methode" },
-  { label: "Secteur", href: "#secteur" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Accueil", href: "/" },
+  { label: "Prestations", href: "/#prestations" },
+  { label: "Mon expérience", href: "/experience" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Contact", href: "/#contact" },
 ];
 
+export const tagline = "Conseil technique · Suivi de chantier · Construction · Rénovation · Solutions travaux · Design";
+
+/* ========================================================================== */
+/*  ACCUEIL                                                                   */
+/* ========================================================================== */
+
 export const hero = {
-  badge: "Expert bâtiment indépendant · Paris & Île-de-France",
-  eyebrow: "Conseil technique · Diagnostic · Suivi de chantier",
-  titleStart: "Un regard d'expert sur votre bâtiment,",
-  titleAccent: "sans rien vous vendre.",
-  lead: "J'analyse, je conseille et je contrôle. Je ne réalise aucuns travaux : mes recommandations ne dépendent que de l'état de votre bâtiment et de votre intérêt.",
-  ctaPrimary: "Appeler",
-  ctaSecondary: "Voir les prestations",
-  pledgeTitle: "Ce que je fais, ce que je ne fais pas",
-  does: [
-    "Diagnostic des désordres et recherche des causes",
-    "Conseil technique et aide à la conception",
-    "Suivi de chantier et contrôle des entreprises",
-  ],
-  doesNot: [
-    "Aucune réalisation de travaux",
-    "Aucune commission sur les devis d'entreprises",
-  ],
+  badge: "Bâtiment depuis 2005 · Paris & Île-de-France",
+  titleStart: "Vos travaux,",
+  titleAccent: "notre expertise du terrain.",
+  lead: "Vous construisez, vous rénovez ou vous rencontrez une difficulté technique ? Depuis 2005, je mets mon expérience du bâtiment au service de vos projets, avec une approche concrète, technique et orientée vers les solutions.",
+  cta: "Parlons de votre projet",
 };
 
 // Visite 3D d'ouverture : chaque étape s'affiche pendant le défilement.
@@ -58,17 +53,17 @@ export const intro = {
       key: "plan",
       index: "01",
       label: "Le plan",
-      title: "Lire le plan,",
-      accent: "pièce par pièce.",
-      text: "Surfaces, circulations, cloisons : avant de juger le bâti, je comprends comment le logement est organisé.",
+      title: "Prises de cotes,",
+      accent: "agencement.",
+      text: "Réflexion sur l'agencement, choix techniques et préparation des travaux : transformer vos idées en un projet cohérent.",
     },
     {
       key: "sejour",
       index: "02",
       label: "Le séjour",
-      title: "Matières, couleurs,",
-      accent: "lumière.",
-      text: "Sols, enduits, ouvertures : chaque choix compte pour un intérieur beau, sain et durable.",
+      title: "Les bons choix,",
+      accent: "au bon moment.",
+      text: "Matériaux, finitions, mise en œuvre : des conseils concrets pour éviter les erreurs et faire les bons choix.",
     },
     {
       key: "cuisine",
@@ -76,151 +71,133 @@ export const intro = {
       label: "La cuisine",
       title: "Les mesures",
       accent: "justes.",
-      text: "Implantation, réseaux, ventilation : les détails techniques qui font qu'une pièce fonctionne vraiment.",
+      text: "Un chantier demande de l'anticipation, de la méthode et une bonne compréhension des contraintes de mise en œuvre.",
     },
     {
       key: "structure",
       index: "04",
       label: "Du sol au toit",
-      title: "En bas, en haut,",
-      accent: "partout.",
-      text: "Des fondations à la charpente, je cherche la cause d'un désordre là où elle se trouve, pas seulement là où elle se voit.",
+      title: "Un problème ?",
+      accent: "Une solution.",
+      text: "Un imprévu ou une difficulté de mise en œuvre : j'analyse la situation et recherche une solution dans le respect des règles de l'art.",
     },
   ],
   outro: {
-    title: "Votre bâtiment mérite",
+    title: "Votre projet mérite",
     accent: "ce regard.",
-    cta: "Découvrir mes missions",
+    cta: "Découvrir les prestations",
   },
+};
+
+export const marquee = [
+  "Conseil technique",
+  "Suivi de chantier",
+  "Construction",
+  "Rénovation",
+  "Solutions travaux",
+  "Design",
+  "Prises de cotes",
+  "Réception des travaux",
+];
+
+export const options = {
+  eyebrow: "Deux possibilités",
+  title: "Deux possibilités, selon votre projet.",
+  lead: "Que vous souhaitiez être conseillé, accompagné avec votre propre équipe ou confier la réalisation des travaux, je vous propose une intervention adaptée à vos besoins.",
+  items: [
+    {
+      tag: "Accompagnement",
+      title: "Avec l'équipe de votre choix",
+      text: "Je vous accompagne dans la réalisation de vos travaux avec l'équipe de votre choix, en vous apportant mon expertise technique et mes conseils pour mener votre projet dans les meilleures conditions.",
+    },
+    {
+      tag: "Réalisation",
+      title: "Je réalise vos travaux",
+      text: "Je peux, à votre demande, réaliser vos travaux, après définition du périmètre et des conditions d'intervention.",
+    },
+  ],
+  cta: "Parlons de votre projet",
 };
 
 export const services = {
   eyebrow: "Prestations",
-  title: "Quatre missions, un seul objectif : un bâtiment sain et bien construit.",
-  lead: "Chaque mission peut être commandée seule ou combinée, de l'avis ponctuel à l'accompagnement complet d'une rénovation.",
+  title: "Un interlocuteur pour vos projets de travaux.",
+  lead: "Du conseil ponctuel à la réalisation, une intervention adaptée à chaque projet.",
   items: [
     {
-      ref: "Mission A",
-      tag: "Ponctuel",
-      title: "Conseil technique",
-      text: "Un avis clair avant de décider : achat, rénovation, extension ou devis à comparer.",
-      points: [
-        "Visite conseil avant achat",
-        "Analyse et comparaison de devis",
-        "Choix des matériaux et des techniques",
-      ],
+      title: "Conseil technique indépendant",
+      text: "Vous avez déjà vos artisans, mais vous souhaitez bénéficier d'un regard expérimenté ? Je vous accompagne dans vos décisions techniques, l'analyse des solutions proposées et la résolution des difficultés rencontrées.",
     },
     {
-      ref: "Mission B",
-      tag: "Rapport écrit",
-      title: "Diagnostic & pathologie",
-      text: "Comprendre l'origine d'un désordre avant de le traiter, pour ne pas payer deux fois.",
-      points: [
-        "Fissures, humidité, infiltrations",
-        "Recherche des causes, pas seulement des symptômes",
-        "Préconisations classées par priorité",
-      ],
+      title: "Suivi et accompagnement de chantier",
+      text: "Je vous accompagne lors de visites et de réunions de chantier pour vous aider à anticiper les problèmes, comprendre les choix techniques et suivre les étapes importantes de votre projet.",
     },
     {
-      ref: "Mission C",
-      tag: "Sur la durée",
-      title: "Suivi de chantier",
-      text: "Un professionnel à vos côtés face aux entreprises, du démarrage à la réception.",
-      points: [
-        "Visites de chantier et comptes rendus",
-        "Contrôle de la conformité et de la qualité",
-        "Assistance à la réception et levée des réserves",
-      ],
+      title: "Recherche de solutions techniques",
+      text: "Un imprévu, une difficulté de mise en œuvre ou une solution qui ne semble pas adaptée ? J'analyse la situation et vous aide à identifier les solutions envisageables dans le respect des règles de l'art.",
     },
     {
-      ref: "Mission D",
-      tag: "Conception",
-      title: "Technique & design du bâtiment",
-      text: "Penser l'espace et la technique ensemble : un projet beau, réaliste et durable.",
-      points: [
-        "Étude de faisabilité et d'aménagement",
-        "Principes constructifs et détails techniques",
-        "Cahier des charges pour consulter les entreprises",
-      ],
+      title: "Réalisation de travaux",
+      text: "Vous préférez confier directement vos travaux à un professionnel ? Selon la nature du projet, je peux également prendre en charge leur réalisation, après définition du périmètre et des conditions d'intervention.",
+    },
+    {
+      title: "Aménagement et préparation de projet",
+      text: "Prises de cotes, réflexion sur l'agencement, choix techniques et préparation des travaux : je vous aide à transformer vos idées en un projet cohérent.",
+    },
+    {
+      title: "Assistance à la réception",
+      text: "Je peux vous accompagner dans l'examen visuel des travaux réalisés, le repérage des défauts apparents et la préparation de vos observations.",
     },
   ],
 };
 
-export const pathologies = {
-  eyebrow: "Pathologies du bâtiment",
-  title: "Vous constatez un désordre ? Il a une cause.",
-  lead: "Les symptômes les plus fréquents que je diagnostique. Le bon traitement dépend toujours de la cause, rarement visible au premier coup d'œil.",
+// Photos envoyées par le client.
+export const field = {
+  eyebrow: "Sur le terrain",
+  title: "Des chantiers concrets.",
+  lead: "Construction, rénovation, suivi de chantier : une expérience polyvalente, acquise chantier après chantier.",
+  photos: [
+    {
+      src: "/images/chantier-sejour-cuisine.jpg",
+      width: 1600,
+      height: 1200,
+      alt: "Pièce de vie rénovée sous les toits : cuisine équipée blanche, parquet en chêne clair et poutres anciennes apparentes",
+      caption: "Pièce de vie sous les toits",
+      detail: "Cuisine, parquet chêne, poutres apparentes",
+    },
+    {
+      src: "/images/chantier-salle-de-bain.jpg",
+      width: 1200,
+      height: 1600,
+      alt: "Salle d'eau rénovée : douche à l'italienne avec paroi vitrée, grands carreaux beiges, meuble vasque suspendu",
+      caption: "Salle d'eau",
+      detail: "Douche à l'italienne, grand format",
+    },
+  ],
+};
+
+export const audiences = {
+  eyebrow: "Pour qui",
+  title: "Vous êtes un particulier ou un professionnel ?",
   items: [
-    { code: "Structure", title: "Fissures", text: "Façades, murs porteurs, dallage : distinguer la fissure sans gravité du désordre qui évolue." },
-    { code: "Humidité", title: "Remontées capillaires", text: "Salpêtre, enduits qui cloquent, odeur de cave en pied de mur." },
-    { code: "Enveloppe", title: "Infiltrations", text: "Toiture, terrasse, menuiseries, façades : localiser l'entrée d'eau réelle." },
-    { code: "Air", title: "Condensation & moisissures", text: "Ventilation insuffisante, ponts thermiques, isolation mal posée." },
-    { code: "Bois", title: "Charpentes & planchers", text: "Affaissements, attaques d'insectes ou de champignons, surcharges." },
-    { code: "Finitions", title: "Malfaçons", text: "Carrelage qui sonne creux, enduits décollés, défauts après travaux." },
-  ],
-};
-
-export const finder = {
-  eyebrow: "Par où commencer",
-  question: "Quelle est votre situation ?",
-  cta: "Demander cette mission",
-  options: [
     {
-      key: "achat",
-      label: "J'achète un bien et je veux savoir où je mets les pieds",
-      mission: "Mission A · Conseil technique",
-      title: "Visite conseil avant achat",
-      text: "Une visite du bien avec vous, avant la signature, pour repérer les points faibles et anticiper les travaux.",
-      steps: ["Visite du bien avec vous", "Points de vigilance expliqués sur place", "Synthèse écrite pour décider ou négocier"],
+      tag: "Particuliers",
+      title: "Pour les particuliers",
+      text: "Vous souhaitez rénover votre maison ou votre appartement, éviter les erreurs et faire les bons choix. Je vous apporte des conseils concrets et un accompagnement adapté à votre projet.",
     },
     {
-      key: "desordre",
-      label: "J'ai un désordre : fissure, humidité, infiltration",
-      mission: "Mission B · Diagnostic & pathologie",
-      title: "Diagnostic du désordre",
-      text: "Trouver la cause avant de traiter, pour une réparation qui tient dans le temps.",
-      steps: ["Observation et relevés sur site", "Analyse des causes probables", "Rapport avec solutions classées par priorité"],
-    },
-    {
-      key: "travaux",
-      label: "Je lance des travaux et je veux être accompagné",
-      mission: "Mission C · Suivi de chantier",
-      title: "Accompagnement de chantier",
-      text: "Un professionnel de votre côté pendant toute la durée des travaux.",
-      steps: ["Analyse des devis et choix des entreprises", "Visites régulières et comptes rendus", "Réception des travaux et levée des réserves"],
-    },
-    {
-      key: "projet",
-      label: "J'ai un projet à concevoir ou à repenser",
-      mission: "Mission D · Technique & design",
-      title: "Conception du projet",
-      text: "Un projet pensé dans son ensemble : usage, esthétique et technique.",
-      steps: ["Étude de faisabilité", "Principes d'aménagement et choix techniques", "Cahier des charges pour consulter les entreprises"],
+      tag: "Professionnels",
+      title: "Pour les entreprises du bâtiment",
+      text: "Vous avez besoin d'un appui technique ponctuel, d'un regard extérieur ou d'aide pour résoudre un problème sur un chantier. Je mets mon expérience du terrain à votre disposition.",
     },
   ],
 };
 
-export const method = {
-  eyebrow: "Méthode",
-  title: "Une démarche simple, en quatre phases.",
-  lead: "Vous savez à chaque étape ce qui est fait, pourquoi, et ce que cela vous coûte.",
-  steps: [
-    { title: "Premier échange", text: "Vous décrivez la situation, photos à l'appui. Je vous dis si et comment je peux vous aider." },
-    { title: "Visite sur site", text: "Observation, relevés et mesures. Rien n'est conclu sans avoir vu le bâtiment." },
-    { title: "Rapport & préconisations", text: "Causes identifiées, solutions classées par priorité, écrites pour être comprises." },
-    { title: "Accompagnement", text: "Si vous le souhaitez : consultation des entreprises, suivi du chantier, réception." },
-  ],
-};
-
-export const independence = {
-  eyebrow: "Indépendance",
-  quote: "Je ne fais pas les travaux. Je n'ai donc aucun intérêt à vous en conseiller plus que nécessaire.",
-  columns: ["Question", "Entreprise de travaux", "Conseil indépendant"],
-  rows: [
-    { q: "Qui recommande les travaux ?", them: "Celui qui va les facturer", us: "Un tiers sans intérêt", usRest: " dans les travaux" },
-    { q: "Qui contrôle le chantier ?", them: "L'entreprise elle-même", us: "Un regard extérieur", usRest: ", de votre côté" },
-    { q: "À la réception ?", them: "Vous seul face à l'entreprise", us: "Un professionnel", usRest: " qui relève les réserves" },
-  ],
+export const since = {
+  eyebrow: "Depuis 2005",
+  title: "L'expérience du terrain depuis 2005.",
+  text: "Construction de maisons, rénovation, suivi de chantier et résolution de problèmes techniques : mon expérience me permet d'aborder vos projets avec pragmatisme et de rechercher des solutions adaptées aux contraintes réelles du bâtiment.",
+  cta: "Découvrir mon parcours",
 };
 
 export const area = {
@@ -238,59 +215,208 @@ export const area = {
   more: "et alentours",
 };
 
-export const contactSection = {
-  eyebrow: "Contact",
-  title: "Parlons de votre bâtiment.",
-  lead: "Appelez-moi ou envoyez un SMS avec quelques mots sur votre situation, et si possible des photos. Je vous rappelle pour fixer un premier échange.",
-  call: "Appeler",
-  sms: "Envoyer un SMS",
-  areaLabel: "Paris · 92 · 93 · 94 · 95 · 91 et alentours",
-};
-
-export const marquee = [
-  "Fissures",
-  "Humidité",
-  "Infiltrations",
-  "Suivi de chantier",
-  "Conseil avant achat",
-  "Analyse de devis",
-  "Réception des travaux",
-  "Pathologies du bâtiment",
-  "Condensation",
-  "Charpentes",
-];
-
-// ⚠️ À VALIDER avec le client : réponses rédigées d'après son message vocal,
-// sans prix ni délais (à ajouter s'il le souhaite).
+// Réponses tirées uniquement des textes et tarifs fournis par le client.
 export const faq = {
   eyebrow: "Questions fréquentes",
   title: "Ce que l'on me demande souvent.",
   items: [
     {
-      q: "Réalisez-vous aussi les travaux ?",
-      a: "Non. Je me consacre uniquement au conseil, au diagnostic et au suivi de chantier. C'est ce qui garantit que mes recommandations ne dépendent que de l'état de votre bâtiment, et jamais d'un chantier à vendre.",
+      q: "Pouvez-vous réaliser les travaux ?",
+      a: "Oui. Selon la nature du projet, je peux prendre en charge la réalisation des travaux, après définition du périmètre et des conditions d'intervention. Un devis spécifique est alors établi avant le commencement des travaux.",
     },
     {
-      q: "Pouvez-vous intervenir pour un simple avis ?",
-      a: "Oui. Une visite conseil ponctuelle suffit souvent : avant un achat, pour comparer des devis, ou pour savoir si une fissure ou une tache d'humidité mérite qu'on s'en inquiète.",
+      q: "J'ai déjà mes artisans, pouvez-vous m'accompagner ?",
+      a: "Oui. Je peux intervenir en tant que conseiller technique, vous accompagner lors des réunions de chantier et vous aider à analyser les difficultés rencontrées.",
     },
     {
-      q: "Que contient un diagnostic ?",
-      a: "Une visite sur place avec observations et relevés, la recherche des causes du désordre, puis un rapport écrit qui explique ce qui se passe et propose des solutions classées par priorité.",
+      q: "Combien coûte une intervention ?",
+      a: "Le conseil et l'assistance technique sont facturés 100 € HT de l'heure, avec un minimum d'une heure. Au-delà, le temps est décompté à la minute. Le déplacement en Île-de-France est de 50 € HT, offert à partir de 3 heures sur site.",
     },
     {
-      q: "Comment se passe le suivi de chantier ?",
-      a: "Je vous représente face aux entreprises : visites régulières, comptes rendus, contrôle de la qualité et de la conformité, puis assistance à la réception des travaux et à la levée des réserves.",
+      q: "Travaillez-vous avec les entreprises du bâtiment ?",
+      a: "Oui. J'apporte un appui technique ponctuel, un regard extérieur ou une aide pour résoudre un problème sur un chantier. Pour un accompagnement régulier, des conditions tarifaires préférentielles peuvent être étudiées.",
     },
     {
       q: "Dans quels secteurs intervenez-vous ?",
-      a: "À Paris, dans les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94), le Val-d'Oise (95), l'Essonne (91) et les communes alentour. En cas de doute sur votre adresse, appelez-moi.",
+      a: "À Paris, dans les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94), le Val-d'Oise (95), l'Essonne (91) et les communes alentour.",
     },
   ],
 };
 
+export const contactSection = {
+  eyebrow: "Contact",
+  title: "Parlons de votre projet.",
+  lead: "Un projet, une question technique ou des travaux à réaliser ? Contactez-moi pour définir ensemble la prestation qui correspond à vos besoins.",
+  call: "Appeler",
+  sms: "Envoyer un SMS",
+  areaLabel: "Paris · 92 · 93 · 94 · 95 · 91 et alentours",
+};
+
+/* ========================================================================== */
+/*  PAGE « MON EXPÉRIENCE »                                                    */
+/* ========================================================================== */
+
+export const experience = {
+  meta: {
+    title: "Mon expérience",
+    description:
+      "Dans le bâtiment depuis 2005 : construction, rénovation, suivi de chantier et pose. Diplôme d'État de poseur-installateur en menuiserie extérieure.",
+  },
+  eyebrow: "Mon expérience",
+  title: "Une expérience construite",
+  titleAccent: "sur le terrain.",
+  tags: ["Bâtiment depuis 2005", "Construction", "Rénovation", "Suivi de chantier", "Pose"],
+  intro: {
+    eyebrow: "Mon expérience du bâtiment",
+    title: "Plus de 20 ans au service de vos projets.",
+    paragraphs: [
+      "Je travaille dans le bâtiment depuis 2005. Au fil des années, j'ai développé une expérience polyvalente grâce à la construction de plusieurs maisons et à la réalisation de nombreux chantiers de rénovation.",
+      "Titulaire d'un diplôme d'État de poseur-installateur en menuiserie extérieure, j'ai acquis une connaissance concrète des travaux, des contraintes techniques et des difficultés qui peuvent apparaître à chaque étape d'un chantier.",
+      "Aujourd'hui, je propose cette expérience aux particuliers et aux professionnels, aussi bien pour le conseil que pour l'accompagnement ou la réalisation de travaux.",
+    ],
+    facts: [
+      { value: "2005", label: "Dans le bâtiment depuis" },
+      { value: "20+", label: "Années d'expérience" },
+      { value: "Diplôme d'État", label: "Poseur-installateur en menuiserie extérieure" },
+    ],
+  },
+  specialty: {
+    eyebrow: "Ma spécialité",
+    title: "Le suivi de chantier et la recherche de solutions.",
+    paragraphs: [
+      "Au cours de mon parcours, j'ai particulièrement développé deux compétences : le suivi des travaux et la résolution des problèmes techniques.",
+      "Un chantier demande de l'anticipation, de la méthode et une bonne compréhension des contraintes de mise en œuvre. Lorsqu'un problème survient, il faut savoir analyser la situation, examiner les possibilités et trouver une solution cohérente.",
+      "C'est cette approche pragmatique que je souhaite mettre au service de mes clients.",
+    ],
+  },
+  pillars: [
+    {
+      title: "Comprendre les difficultés",
+      text: "Analyser les contraintes du chantier, identifier les points sensibles et comprendre les causes possibles d'un problème avant de décider de la suite.",
+    },
+    {
+      title: "Trouver des solutions adaptées",
+      text: "Étudier les solutions envisageables en tenant compte des contraintes techniques, de la faisabilité et des règles de l'art applicables.",
+    },
+    {
+      title: "Accompagner la réalisation",
+      text: "Aider le client à suivre les étapes importantes, à anticiper les difficultés et à faire les bons choix tout au long de son projet.",
+    },
+  ],
+  approach: {
+    eyebrow: "Une approche adaptée à chaque client",
+    title: "Plusieurs façons de travailler, selon vos besoins.",
+    items: [
+      {
+        q: "Vous avez déjà votre équipe ?",
+        a: "Je peux intervenir en tant que conseiller technique, vous accompagner lors des réunions de chantier et vous aider à analyser les difficultés rencontrées.",
+      },
+      {
+        q: "Vous souhaitez confier vos travaux à un professionnel ?",
+        a: "Selon la nature du projet, je peux également vous proposer la réalisation des travaux, dans un cadre défini à l'avance.",
+      },
+      {
+        q: "Vous souhaitez être accompagné de la préparation à la fin du chantier ?",
+        a: "Nous pouvons étudier une mission adaptée, allant du conseil ponctuel à un accompagnement plus complet, selon le périmètre et les responsabilités convenus.",
+      },
+    ],
+  },
+  commitment: {
+    eyebrow: "Mon engagement",
+    title: "Une approche directe, pragmatique et fondée sur l'expérience du terrain.",
+    text: "Mon objectif est de vous aider à prendre des décisions éclairées, de rechercher des solutions pertinentes et de contribuer au bon déroulement de vos travaux.",
+    signature: "L'expérience du terrain au service de vos projets.",
+  },
+};
+
+/* ========================================================================== */
+/*  PAGE « TARIFS »                                                            */
+/* ========================================================================== */
+
+export const pricing = {
+  meta: {
+    title: "Tarifs",
+    description:
+      "Conseil et assistance technique : 100 € HT de l'heure. Déplacement en Île-de-France : 50 € HT, offert dès 3 heures sur site.",
+  },
+  eyebrow: "Tarifs",
+  title: "Des tarifs clairs",
+  titleAccent: "et transparents.",
+  lead: "Conseil technique et accompagnement de chantier : tarifs et conditions d'intervention.",
+  hourly: {
+    label: "Conseil et assistance technique",
+    price: 100,
+    unit: "€ HT / heure",
+    intro: "Ce tarif s'applique notamment aux prestations suivantes :",
+    items: [
+      "Visites et réunions de chantier.",
+      "Conseil technique avant et pendant les travaux.",
+      "Suivi ponctuel de chantier.",
+      "Recherche de solutions aux difficultés rencontrées.",
+      "Prises de cotes et relevés sur site.",
+      "Accompagnement lors de la réception des travaux.",
+    ],
+  },
+  travel: {
+    label: "Déplacement en Île-de-France",
+    price: 50,
+    unit: "€ HT par intervention",
+    note: "Le forfait de déplacement est offert à partir de 3 heures de présence sur site lors d'une même intervention.",
+  },
+  minimum: {
+    label: "Minimum de facturation",
+    text: "Toute intervention est facturée sur une base minimale d'une heure, soit 100 € HT, hors déplacement lorsqu'il est facturable.",
+    detail: "Au-delà de la première heure, le temps supplémentaire est décompté à la minute, sur la base de 100 € HT pour 60 minutes, soit 1,6667 € HT par minute.",
+    examples: [
+      { duration: "1 heure", price: "100 € HT" },
+      { duration: "1 h 15", price: "125 € HT" },
+      { duration: "1 h 30", price: "150 € HT" },
+      { duration: "2 heures", price: "200 € HT" },
+      { duration: "3 heures", price: "300 € HT, déplacement offert" },
+    ],
+  },
+  calculator: {
+    title: "Estimez votre intervention",
+    note: "Estimation indicative, hors recherches techniques, plans et documents. Montants hors taxes.",
+  },
+  others: [
+    {
+      title: "Recherches techniques et résolution de problèmes",
+      paragraphs: [
+        "Les recherches techniques approfondies et le travail nécessaire à l'élaboration de solutions spécifiques sont facturés séparément, sur la base de 100 € HT / heure.",
+        "Cela comprend notamment le temps consacré à l'analyse du problème, aux recherches documentaires, à l'étude des solutions envisageables et à la préparation de recommandations techniques.",
+        "Le temps est décompté à la minute, après accord préalable sur la mission.",
+      ],
+    },
+    {
+      title: "Plans et rédaction de documents",
+      paragraphs: [
+        "La réalisation ou la modification de plans, leur mise au propre ainsi que la rédaction de notes techniques détaillées et de documents spécifiques ne sont pas comprises dans le tarif des interventions sur site.",
+        "Ces prestations font l'objet d'un devis ou d'un accord préalable précisant le contenu de la prestation et son coût.",
+      ],
+    },
+    {
+      title: "Réalisation de travaux",
+      paragraphs: [
+        "Lorsque vous souhaitez me confier directement vos travaux, les prestations sont définies selon la nature du projet, les travaux concernés et les contraintes du chantier.",
+        "Un devis spécifique est alors établi avant le commencement des travaux.",
+      ],
+    },
+    {
+      title: "Accompagnement régulier et tarifs préférentiels",
+      paragraphs: [
+        "Pour les entreprises et les clients qui souhaitent un accompagnement régulier, des conditions tarifaires préférentielles peuvent être étudiées en fonction du volume d'interventions, de leur fréquence et des prestations demandées.",
+      ],
+    },
+  ],
+  cta: {
+    title: "Parlons de votre projet.",
+    text: "Vous avez besoin d'un conseil technique, d'un accompagnement de chantier ou souhaitez faire réaliser des travaux ? Contactez-moi pour définir votre besoin et obtenir une proposition adaptée.",
+  },
+};
+
 export const footer = {
-  copyright: "© 2026 Aplomb. Tous droits réservés.",
-  tagline: "Conseil & expertise bâtiment indépendant",
+  copyright: "© 2026 Baron Conseil Bâtiment. Tous droits réservés.",
+  tagline: "Conseil, accompagnement et réalisation de travaux.",
   legal: "Mentions légales", // TODO : page à créer (SIRET, assurance, hébergeur)
 };

@@ -10,11 +10,13 @@ import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Magnetic } from "@/components/site/Motion";
+import { NavLink, useIsActive } from "@/components/site/NavLink";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const isActive = useIsActive();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -33,21 +35,28 @@ export function Header() {
             : "h-[72px] max-w-[1240px] border-transparent bg-transparent",
         )}
       >
-        <a href="#accueil" aria-label="Aplomb, retour en haut">
+        <NavLink href="/" aria-label="Baron Conseil Bâtiment, accueil">
           <Logo compact={scrolled} />
-        </a>
+        </NavLink>
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center" onPointerLeave={() => setHovered(null)}>
             {nav.map((item) => (
               <li key={item.href} className="relative">
-                <a
+                <NavLink
                   href={item.href}
                   onPointerEnter={() => setHovered(item.href)}
-                  className="relative z-10 block px-4 py-2 text-[0.92rem] text-ink-2 transition-colors duration-300 hover:text-ink"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={cn(
+                    "relative z-10 block px-4 py-2 text-[0.92rem] transition-colors duration-300 hover:text-ink",
+                    isActive(item.href) ? "text-ink" : "text-ink-2",
+                  )}
                 >
                   {item.label}
-                </a>
+                  {isActive(item.href) && (
+                    <span className="absolute bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-steel" />
+                  )}
+                </NavLink>
                 {hovered === item.href && (
                   <motion.span
                     layoutId="nav-pill"
@@ -82,7 +91,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent>
               <SheetTitle className="sr-only">Menu</SheetTitle>
-              <SheetDescription className="sr-only">Navigation du site Aplomb</SheetDescription>
+              <SheetDescription className="sr-only">Navigation du site Baron Conseil Bâtiment</SheetDescription>
               <div className="blueprint-dark absolute inset-0 -z-10" />
               <div className="flex items-center justify-between p-6">
                 <Logo light />
@@ -105,7 +114,7 @@ export function Header() {
                       transition={{ delay: 0.15 + i * 0.06, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                       className="border-b border-paper/10"
                     >
-                      <a
+                      <NavLink
                         href={item.href}
                         onClick={() => setOpen(false)}
                         className="group flex items-center justify-between py-5 font-serif text-[2.4rem] leading-none text-paper"
@@ -114,7 +123,7 @@ export function Header() {
                           {item.label}
                         </span>
                         <ArrowUpRight className="size-6 text-mist/50 transition-transform duration-500 ease-out-expo group-hover:rotate-45 group-hover:text-mist" />
-                      </a>
+                      </NavLink>
                     </motion.li>
                   ))}
                 </ul>

@@ -98,7 +98,7 @@ export function Tour() {
                 </Magnetic>
                 <Magnetic>
                   <Button asChild variant="outline" size="lg">
-                    <a href="#prestations">{hero.ctaSecondary}</a>
+                    <a href="#contact">{hero.cta}</a>
                   </Button>
                 </Magnetic>
               </div>
