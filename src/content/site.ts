@@ -24,10 +24,12 @@ export const nav = [
   { label: "Pathologies", href: "#pathologies" },
   { label: "Méthode", href: "#methode" },
   { label: "Secteur", href: "#secteur" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const hero = {
+  badge: "Expert bâtiment indépendant · Paris & Île-de-France",
   eyebrow: "Conseil technique · Diagnostic · Suivi de chantier",
   titleStart: "Un regard d'expert sur votre bâtiment,",
   titleAccent: "sans rien vous vendre.",
@@ -197,7 +199,50 @@ export const contactSection = {
   areaLabel: "Paris · 92 · 94 · 91 et alentours",
 };
 
+export const marquee = [
+  "Fissures",
+  "Humidité",
+  "Infiltrations",
+  "Suivi de chantier",
+  "Conseil avant achat",
+  "Analyse de devis",
+  "Réception des travaux",
+  "Pathologies du bâtiment",
+  "Condensation",
+  "Charpentes",
+];
+
+// ⚠️ À VALIDER avec le client : réponses rédigées d'après son message vocal,
+// sans prix ni délais (à ajouter s'il le souhaite).
+export const faq = {
+  eyebrow: "Questions fréquentes",
+  title: "Ce que l'on me demande souvent.",
+  items: [
+    {
+      q: "Réalisez-vous aussi les travaux ?",
+      a: "Non. Je me consacre uniquement au conseil, au diagnostic et au suivi de chantier. C'est ce qui garantit que mes recommandations ne dépendent que de l'état de votre bâtiment, et jamais d'un chantier à vendre.",
+    },
+    {
+      q: "Pouvez-vous intervenir pour un simple avis ?",
+      a: "Oui. Une visite conseil ponctuelle suffit souvent : avant un achat, pour comparer des devis, ou pour savoir si une fissure ou une tache d'humidité mérite qu'on s'en inquiète.",
+    },
+    {
+      q: "Que contient un diagnostic ?",
+      a: "Une visite sur place avec observations et relevés, la recherche des causes du désordre, puis un rapport écrit qui explique ce qui se passe et propose des solutions classées par priorité.",
+    },
+    {
+      q: "Comment se passe le suivi de chantier ?",
+      a: "Je vous représente face aux entreprises : visites régulières, comptes rendus, contrôle de la qualité et de la conformité, puis assistance à la réception des travaux et à la levée des réserves.",
+    },
+    {
+      q: "Dans quels secteurs intervenez-vous ?",
+      a: "À Paris, dans les Hauts-de-Seine (92), le Val-de-Marne (94), l'Essonne (91) et les communes alentour. En cas de doute sur votre adresse, appelez-moi.",
+    },
+  ],
+};
+
 export const footer = {
-  copyright: "© 2026 Aplomb · Conseil & expertise bâtiment indépendant",
+  copyright: "© 2026 Aplomb. Tous droits réservés.",
+  tagline: "Conseil & expertise bâtiment indépendant",
   legal: "Mentions légales", // TODO : page à créer (SIRET, assurance, hébergeur)
 };

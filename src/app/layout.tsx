@@ -1,28 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 
-import { contact, site } from "@/content/site";
-import { PhoneIcon } from "@/components/icons";
+import { site } from "@/content/site";
+import { Loader } from "@/components/site/Loader";
+import { SmoothScroll } from "@/components/site/SmoothScroll";
+import { ScrollProgress } from "@/components/site/Motion";
+import { CallFloat } from "@/components/site/CallFloat";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
-  display: "swap",
-});
+const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
+
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -42,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#eceae4",
+  themeColor: "#f3efe8",
 };
 
 const jsonLd = {
@@ -63,16 +57,18 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${archivo.variable} ${newsreader.variable} ${plexMono.variable}`}>
+    <html lang="fr" className={`${geist.variable} ${geistMono.variable} ${instrument.variable}`}>
       <body>
+        <Loader />
+        <SmoothScroll />
+        <ScrollProgress />
         {children}
+        <CallFloat />
+        <div className="grain" aria-hidden />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <a className="call-float" href={contact.phoneHref} aria-label={`Appeler le ${contact.phoneDisplay}`}>
-          <PhoneIcon /> Appeler
-        </a>
       </body>
     </html>
   );
