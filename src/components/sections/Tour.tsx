@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowDown, ArrowRight, Phone } from "lucide-react";
 
 import { contact, hero, intro } from "@/content/site";
@@ -9,10 +9,17 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/site/Motion";
-import { TOUR_VIEWS, TourStage } from "@/components/sections/TourStage";
+import { atFrame, DroneStage } from "@/components/sections/DroneStage";
 
-// Fenêtres de défilement de chaque étape (la première image est l'accueil).
-const WINDOWS = TOUR_VIEWS.slice(1).map((v) => v.win);
+// Fenêtres de défilement de chaque étape, calées sur les images du plan-séquence :
+// vue d'ensemble (drone en hauteur), façades (descente vers la piscine), séjour, cuisine, puis conclusion.
+const WINDOWS: [number, number][] = [
+  [atFrame(7), atFrame(44)],
+  [atFrame(56), atFrame(106)],
+  [atFrame(138), atFrame(166)],
+  [atFrame(171), atFrame(192)],
+  [0.872, 0.95],
+];
 
 function Words({ text, start, className }: { text: string; start: number; className?: string }) {
   return text.split(" ").map((w, i) => (
@@ -26,16 +33,16 @@ function Words({ text, start, className }: { text: string; start: number; classN
 }
 
 /**
- * Ouverture plein écran : une visite de villa en images photoréalistes pilotée par le défilement
- * (façades, plan, séjour, cuisine, coupe du sol au toit), avec le texte qui accompagne.
+ * Ouverture plein écran : un plan-séquence de drone piloté par le défilement
+ * (vue du ciel, descente vers la piscine, entrée dans le séjour, cuisine), avec le texte qui accompagne.
  */
 export function Tour() {
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.045], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.045], [0, -60]);
-  const heroBlur = useTransform(scrollYProgress, [0, 0.045], ["blur(0px)", "blur(8px)"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.03], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.03], [0, -60]);
+  const heroBlur = useTransform(scrollYProgress, [0, 0.03], ["blur(0px)", "blur(8px)"]);
   const railOpacity = useTransform(scrollYProgress, [0.04, 0.07, 0.95, 0.97], [0, 1, 1, 0]);
   const outroOpacity = useTransform(scrollYProgress, [0.955, 0.99], [0, 1]);
   const outroY = useTransform(scrollYProgress, [0.955, 0.99], [30, 0]);
@@ -45,7 +52,7 @@ export function Tour() {
     <section id="accueil" ref={section} className="relative h-[760vh]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {/* Images plein écran */}
-        <TourStage progress={scrollYProgress} />
+        <DroneStage progress={scrollYProgress} />
         {/* Voiles pour fondre la scène dans la page */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bone/90 to-transparent sm:h-40" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bone to-transparent" />
@@ -164,25 +171,56 @@ function StepPanel({
   progress: MotionValue<number>;
 }) {
   const [a, b] = win;
-  const opacity = useTransform(progress, [a - 0.02, a + 0.02, b - 0.03, b], [0, 1, 1, 0]);
-  const y = useTransform(progress, [a - 0.02, a + 0.02, b - 0.03, b], [40, 0, 0, -30]);
-  const pointer = useTransform(opacity, (o) => (o > 0.5 ? "auto" : "none"));
+  const [active, setActive] = useState(false);
+  useMotionValueEvent(progress, "change", (p) => setActive(p > a + 0.004 && p < b - 0.004));
+  const words = [...step.title.split(" ").map((w) => ({ w, accent: false })), ...step.accent.split(" ").map((w) => ({ w, accent: true }))];
+  const ease = [0.16, 1, 0.3, 1] as const;
   return (
-    <motion.div
-      className="absolute inset-x-0 bottom-0 px-3 pb-3 sm:inset-x-auto sm:bottom-auto sm:top-1/2 sm:left-8 sm:max-w-[440px] sm:-translate-y-1/2 sm:px-0 sm:pb-0 lg:left-[max(2rem,calc((100vw-1240px)/2+2rem))]"
-      style={{ opacity, y, pointerEvents: pointer }}
+    <div
+      className="pointer-events-none absolute inset-x-0 bottom-0 px-3 pb-3 sm:inset-x-auto sm:bottom-auto sm:top-1/2 sm:left-8 sm:w-[460px] sm:-translate-y-1/2 sm:px-0 sm:pb-0 lg:left-[max(2rem,calc((100vw-1240px)/2+2rem))]"
+      aria-hidden={!active}
     >
-      <div className="rounded-[28px] border border-ink/[0.07] bg-paper/80 p-6 shadow-[0_30px_70px_-40px_rgba(15,18,21,0.5)] backdrop-blur-xl sm:p-8">
-        <p className="flex items-center gap-3 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-stone">
+      <motion.div
+        className="relative overflow-hidden rounded-[30px] border border-paper/50 bg-paper/78 p-6 shadow-[0_40px_90px_-40px_rgba(15,18,21,0.55)] backdrop-blur-2xl sm:p-9"
+        initial={false}
+        animate={active ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 34, scale: 0.98 }}
+        transition={{ duration: active ? 0.8 : 0.45, ease }}
+      >
+        <motion.span
+          className="absolute top-0 left-0 h-[3px] bg-steel"
+          initial={false}
+          animate={{ width: active ? "100%" : "0%" }}
+          transition={{ duration: 1.4, ease, delay: active ? 0.15 : 0 }}
+        />
+        <p className="flex items-center gap-3 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-stone">
           <span className="rounded-full border border-ink/10 px-2 py-0.5 text-steel">{step.index}</span>
           {step.label}
         </p>
-        <h2 className="mt-4 text-[clamp(1.9rem,3.4vw,2.9rem)] font-medium leading-[1.02] tracking-[-0.03em]">
-          {step.title} <span className="font-serif font-normal italic text-steel">{step.accent}</span>
+        <h2 className="mt-4 text-[clamp(2rem,3.6vw,3.1rem)] font-medium leading-[1.02] tracking-[-0.03em]">
+          {words.map(({ w, accent }, i) => (
+            <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+              <motion.span
+                className={cn("inline-block", accent && "font-serif font-normal italic text-steel")}
+                initial={false}
+                animate={active ? { y: "0%", opacity: 1, filter: "blur(0px)" } : { y: "110%", opacity: 0, filter: "blur(6px)" }}
+                transition={{ duration: 0.75, ease, delay: active ? 0.12 + i * 0.07 : 0 }}
+              >
+                {w}
+              </motion.span>
+              {"\u00a0"}
+            </span>
+          ))}
         </h2>
-        <p className="mt-4 text-[1rem] leading-[1.7] text-ink-2">{step.text}</p>
-      </div>
-    </motion.div>
+        <motion.p
+          className="mt-4 text-[1rem] leading-[1.7] text-ink-2"
+          initial={false}
+          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+          transition={{ duration: 0.7, ease, delay: active ? 0.35 + words.length * 0.05 : 0 }}
+        >
+          {step.text}
+        </motion.p>
+      </motion.div>
+    </div>
   );
 }
 

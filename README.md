@@ -12,7 +12,7 @@ Site vitrine : conseil technique, suivi de chantier, construction, rénovation e
 - **Tous les textes, prix, numéro** : `src/content/site.ts` (textes du client repris mot pour mot).
 - **Photos** : `public/images/` (référencées dans `field.photos` de `site.ts`).
 - **Logo officiel** : `public/images/logo-*.png` (fond transparent ; versions `-light` pour fonds sombres), favicon : `src/app/icon.png` et `apple-icon.png`.
-- **Visite de la villa** : `src/components/sections/Tour.tsx` (textes et étapes) et `TourStage.tsx` (images plein écran qui se fondent et zooment au défilement, étiquettes). Les images sont dans `public/tour/` (une version paysage et une version portrait par vue), calculées avec Blender ; les positions des étiquettes sont dans `src/content/tour-points.json` et leurs textes dans `intro.labels` de `src/content/site.ts`.
+- **Vol en drone de la villa** : `src/components/sections/Tour.tsx` (textes et étapes) et `DroneStage.tsx` (lecteur d'images au défilement, comme une vidéo). Les 200 images sont dans `public/tour/seq/` (`f0001.webp` à `f0200.webp`), calculées avec Blender ; les textes des étapes sont dans `intro.steps` de `src/content/site.ts`.
 - **Écran d'ouverture** : `src/components/site/Loader.tsx` (attend que la première image de la visite soit chargée).
 - Composants shadcn : `src/components/ui/`.
 
