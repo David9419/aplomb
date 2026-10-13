@@ -15,9 +15,11 @@ export const site = {
 export const contact = {
   phoneDisplay: "07 44 98 17 75",
   phoneHref: "tel:+33744981775",
-  smsHref:
-    "sms:+33744981775?&body=" +
-    encodeURIComponent("Bonjour, je vous contacte au sujet de mon projet : "),
+  whatsappHref:
+    "https://wa.me/33744981775?text=" +
+    encodeURIComponent("Bonjour, je vous contacte depuis votre site au sujet de mon projet : "),
+  whatsappLabel: "Écrire sur WhatsApp",
+  whatsappAvailability: "Disponible 6j/7 · 24h/24",
   email: "", // TODO : adresse e-mail du client
 };
 
@@ -288,7 +290,7 @@ export const contactSection = {
   title: "Parlons de votre projet.",
   lead: "Un projet, une question technique ou des travaux à réaliser ? Contactez-moi pour définir ensemble la prestation qui correspond à vos besoins.",
   call: "Appeler",
-  sms: "Envoyer un SMS",
+  whatsapp: "Écrire sur WhatsApp",
   areaLabel: "Paris · 92 · 93 · 94 · 95 · 91 et alentours",
 };
 
@@ -559,7 +561,7 @@ export const privacy = {
       title: "Données collectées",
       paragraphs: [
         "Le site ne comporte ni formulaire, ni espace client, ni outil de mesure d'audience. Aucune donnée personnelle n'est collectée lors de la simple consultation des pages.",
-        "Lorsque vous me contactez par téléphone ou par SMS, je recueille uniquement les informations que vous me communiquez : nom, numéro de téléphone, adresse du chantier et description de votre projet.",
+        "Lorsque vous me contactez par téléphone ou par WhatsApp, je recueille uniquement les informations que vous me communiquez : nom, numéro de téléphone, adresse du chantier et description de votre projet.",
       ],
     },
     {

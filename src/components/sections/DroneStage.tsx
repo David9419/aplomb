@@ -95,20 +95,37 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     return -1;
   };
 
+  const paint = (ctx: CanvasRenderingContext2D, img: HTMLImageElement, W: number, H: number) => {
+    const sc = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    const w = img.naturalWidth * sc;
+    const h = img.naturalHeight * sc;
+    ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+  };
+
+  /** Dessine la position courante ; entre deux images, la suivante se fond sur la précédente (mouvement continu). */
   function draw(force = false) {
     const c = canvas.current;
     if (!c) return;
-    const idx = nearest(Math.round(current.current));
-    if (idx < 0 || (idx === shown.current && !force)) return;
-    const img = frames.current[idx]!;
+    const pos = current.current;
+    const key = Math.round(pos * 40) / 40;
+    if (key === shown.current && !force) return;
+    const i0 = Math.floor(pos);
+    const base = nearest(i0);
+    if (base < 0) return;
     const ctx = c.getContext("2d");
     if (!ctx) return;
+    ctx.imageSmoothingQuality = "high";
     const { width: W, height: H } = c;
-    const s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
-    const w = img.naturalWidth * s;
-    const h = img.naturalHeight * s;
-    ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
-    shown.current = idx;
+    ctx.globalAlpha = 1;
+    paint(ctx, frames.current[base]!, W, H);
+    const frac = pos - i0;
+    const nxt = frames.current[i0 + 1];
+    if (base === i0 && nxt && frac > 0.02) {
+      ctx.globalAlpha = frac;
+      paint(ctx, nxt, W, H);
+      ctx.globalAlpha = 1;
+    }
+    shown.current = key;
   }
 
   // taille du canvas = écran × densité de pixels (plafonnée)
@@ -136,7 +153,7 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     let raf = 0;
     const tick = () => {
       const d = target.current - current.current;
-      current.current += Math.abs(d) < 0.05 ? d : d * 0.18;
+      current.current += Math.abs(d) < 0.01 ? d : d * 0.14;
       draw();
       raf = requestAnimationFrame(tick);
     };

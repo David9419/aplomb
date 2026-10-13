@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Copy, MessageSquare, Phone } from "lucide-react";
+import { Check, Copy, Phone } from "lucide-react";
 
 import { contact, contactSection } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { Magnetic, Reveal, SplitHeading } from "@/components/site/Motion";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export function Contact({
   title = contactSection.title,
@@ -69,8 +70,8 @@ export function Contact({
               </Magnetic>
               <Magnetic>
                 <Button asChild variant="ghostLight" size="lg">
-                  <a href={contact.smsHref}>
-                    <MessageSquare /> {contactSection.sms}
+                  <a href={contact.whatsappHref} target="_blank" rel="noopener noreferrer">
+                    <WhatsAppIcon /> {contactSection.whatsapp}
                   </a>
                 </Button>
               </Magnetic>
