@@ -102,30 +102,17 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
   };
 
-  /** Dessine la position courante ; entre deux images, la suivante se fond sur la précédente (mouvement continu). */
+  /** Dessine l'image correspondant à la position courante (une seule image, toujours nette). */
   function draw(force = false) {
     const c = canvas.current;
     if (!c) return;
-    const pos = current.current;
-    const key = Math.round(pos * 40) / 40;
-    if (key === shown.current && !force) return;
-    const i0 = Math.floor(pos);
-    const base = nearest(i0);
-    if (base < 0) return;
+    const idx = nearest(Math.round(current.current));
+    if (idx < 0 || (idx === shown.current && !force)) return;
     const ctx = c.getContext("2d");
     if (!ctx) return;
     ctx.imageSmoothingQuality = "high";
-    const { width: W, height: H } = c;
-    ctx.globalAlpha = 1;
-    paint(ctx, frames.current[base]!, W, H);
-    const frac = pos - i0;
-    const nxt = frames.current[i0 + 1];
-    if (base === i0 && nxt && frac > 0.02) {
-      ctx.globalAlpha = frac;
-      paint(ctx, nxt, W, H);
-      ctx.globalAlpha = 1;
-    }
-    shown.current = key;
+    paint(ctx, frames.current[idx]!, c.width, c.height);
+    shown.current = idx;
   }
 
   // taille du canvas = écran × densité de pixels (plafonnée)
