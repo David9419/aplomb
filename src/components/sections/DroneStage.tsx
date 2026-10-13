@@ -8,7 +8,9 @@ export const FRAME_COUNT = 200;
 /** Part du défilement consacrée au film ; au-delà, la dernière image reste à l'écran. */
 export const FILM_END = 0.9;
 
-const src = (i: number) => `/tour/seq/f${String(i + 1).padStart(4, "0")}.webp`;
+/** Écran en hauteur (téléphone) → film cadré en portrait ; sinon film paysage. */
+const folder = () => (window.matchMedia("(max-aspect-ratio: 9/10)").matches ? "seq-m" : "seq");
+const src = (dir: string, i: number) => `/tour/${dir}/f${String(i + 1).padStart(4, "0")}.webp`;
 
 /** Position (0 → 1) dans le défilement qui correspond à une image du film (1 → FRAME_COUNT). */
 export const atFrame = (f: number) => ((f - 1) / (FRAME_COUNT - 1)) * FILM_END;
@@ -31,6 +33,7 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     const imgs: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
     frames.current = imgs;
     let cancelled = false;
+    const dir = folder();
     // ordre de chargement : 1re image, puis une image sur 8, sur 4, sur 2, puis toutes
     const order: number[] = [];
     const seen = new Set<number>();
@@ -60,7 +63,7 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
         if (loaded >= firstPass) signalReady();
         pump();
       };
-      img.src = src(i);
+      img.src = src(dir, i);
     };
     for (let k = 0; k < PARALLEL; k++) pump();
     return () => {
