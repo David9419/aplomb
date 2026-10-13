@@ -33,7 +33,7 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     const imgs: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
     frames.current = imgs;
     let cancelled = false;
-    const dir = folder();
+    let dir = folder();
     // ordre de chargement : 1re image, puis une image sur 8, sur 4, sur 2, puis toutes
     const order: number[] = [];
     const seen = new Set<number>();
@@ -65,7 +65,20 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
       };
       img.src = src(dir, i);
     };
-    for (let k = 0; k < PARALLEL; k++) pump();
+    const start = () => {
+      for (let k = 0; k < PARALLEL; k++) pump();
+    };
+    if (dir === "seq") start();
+    else {
+      // film portrait absent → on retombe sur le film paysage
+      const probe = new Image();
+      probe.onload = start;
+      probe.onerror = () => {
+        dir = "seq";
+        start();
+      };
+      probe.src = src(dir, 0);
+    }
     return () => {
       cancelled = true;
     };
