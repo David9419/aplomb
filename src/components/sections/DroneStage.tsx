@@ -10,7 +10,7 @@ export const FILM_END = 0.9;
 
 /** Écran en hauteur (téléphone) → film cadré en portrait ; sinon film paysage. */
 const folder = () => (window.matchMedia("(max-aspect-ratio: 9/10)").matches ? "seq-m" : "seq");
-const src = (dir: string, i: number) => `/tour/${dir}/f${String(i + 1).padStart(4, "0")}.webp`;
+const src = (dir: string, i: number) => `/tour/${dir}/f${String(i + 1).padStart(4, "0")}.jpg`;
 
 /** Position (0 → 1) dans le défilement qui correspond à une image du film (1 → FRAME_COUNT). */
 export const atFrame = (f: number) => ((f - 1) / (FRAME_COUNT - 1)) * FILM_END;
@@ -46,23 +46,27 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
       }
     }
     if (!seen.has(FRAME_COUNT - 1)) order.push(FRAME_COUNT - 1);
-    const firstPass = Math.ceil(FRAME_COUNT / 8) + 1;
     let loaded = 0;
     let next = 0;
-    const PARALLEL = 6;
+    const PARALLEL = 8;
     const pump = () => {
       if (cancelled || next >= order.length) return;
       const i = order[next++];
       const img = new Image();
       img.decoding = "async";
-      img.onload = img.onerror = () => {
+      const done = () => {
         if (cancelled) return;
         if (img.naturalWidth) imgs[i] = img;
         loaded++;
         if (loaded === 1) draw(true);
-        if (loaded >= firstPass) signalReady();
+        // l'écran d'ouverture attend le film entier, déjà décodé : aucune saccade ensuite
+        if (loaded >= order.length) signalReady();
         pump();
       };
+      img.onload = () => {
+        img.decode().then(done, done);
+      };
+      img.onerror = done;
       img.src = src(dir, i);
     };
     const start = () => {
@@ -140,7 +144,7 @@ export function DroneStage({ progress }: { progress: MotionValue<number> }) {
     let raf = 0;
     const tick = () => {
       const d = target.current - current.current;
-      current.current += Math.abs(d) < 0.01 ? d : d * 0.14;
+      current.current += Math.abs(d) < 0.3 ? d : d * 0.32;
       draw();
       raf = requestAnimationFrame(tick);
     };

@@ -42,7 +42,7 @@ export function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.085,
+      lerp: 0.11,
       prevent: (node) => !!node.closest?.("[role='dialog']"),
     });
     lenisRef.current = lenis;
