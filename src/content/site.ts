@@ -478,7 +478,7 @@ export const legalNotice = {
     {
       title: "Éditeur du site",
       paragraphs: [
-        "Le présent site est édité par la société BARON RENOV, société par actions simplifiée unipersonnelle (SASU) au capital de 1 000,00 €, exerçant sous le nom commercial « Baron Conseil Bâtiment ».",
+        "Le présent site est édité par la société BARON RENOV, société par actions simplifiée unipersonnelle (SASU) au capital de 1 000,00 €, exerçant sous le nom commercial « Baron Conseil Bâtiment », représentée par son président, Jerome-Alexandre Baron.",
         "Siège social : 117, rue de Charenton, 75012 Paris.",
         "SIREN : 934 120 205 — RCS Paris. SIRET : 934 120 205 00018. Numéro de TVA intracommunautaire : FR 72 934 120 205.",
         "Téléphone : 07 44 98 17 75. E-mail : baronrenov94@gmail.com.",
@@ -486,7 +486,7 @@ export const legalNotice = {
     },
     {
       title: "Directeur de la publication",
-      paragraphs: ["[Nom et prénom du président], en qualité de président de la SASU BARON RENOV."],
+      paragraphs: ["Jerome-Alexandre Baron, en qualité de président de la SASU BARON RENOV."],
     },
     {
       title: "Hébergement",
@@ -554,7 +554,7 @@ export const privacy = {
     {
       title: "Responsable du traitement",
       paragraphs: [
-        "SASU BARON RENOV (nom commercial : Baron Conseil Bâtiment), 117, rue de Charenton, 75012 Paris — SIREN 934 120 205. Contact : 07 44 98 17 75 — baronrenov94@gmail.com.",
+        "SASU BARON RENOV (nom commercial : Baron Conseil Bâtiment), représentée par Jerome-Alexandre Baron, 117, rue de Charenton, 75012 Paris — SIREN 934 120 205. Contact : 07 44 98 17 75 — baronrenov94@gmail.com.",
       ],
     },
     {
