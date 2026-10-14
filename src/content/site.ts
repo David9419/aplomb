@@ -501,12 +501,6 @@ export const legalNotice = {
       ],
     },
     {
-      title: "Médiation de la consommation",
-      paragraphs: [
-        "Conformément au Code de la consommation, le client particulier peut recourir gratuitement à un médiateur de la consommation en cas de litige : [nom et coordonnées du médiateur].",
-      ],
-    },
-    {
       title: "Tarifs",
       paragraphs: [
         "Les tarifs indiqués sur le site sont exprimés hors taxes et donnés à titre informatif. Seuls le devis ou l'accord préalable établis pour chaque mission font foi.",
