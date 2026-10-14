@@ -95,7 +95,13 @@ export function Contact({
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <p className="mt-10 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-mist/50">{contactSection.areaLabel}</p>
+            <a
+              href={contact.emailHref}
+              className="mt-10 inline-block text-[0.95rem] text-mist/80 underline decoration-mist/30 underline-offset-4 transition-colors hover:text-paper hover:decoration-paper"
+            >
+              {contact.email}
+            </a>
+            <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-mist/50">{contactSection.areaLabel}</p>
           </Reveal>
         </div>
       </div>

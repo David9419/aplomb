@@ -20,7 +20,8 @@ export const contact = {
     encodeURIComponent("Bonjour, je vous contacte depuis votre site au sujet de mon projet : "),
   whatsappLabel: "Écrire sur WhatsApp",
   whatsappAvailability: "Disponible 6j/7 · 24h/24",
-  email: "", // TODO : adresse e-mail du client
+  email: "baronrenov94@gmail.com",
+  emailHref: "mailto:baronrenov94@gmail.com",
 };
 
 export const nav = [
@@ -477,15 +478,15 @@ export const legalNotice = {
     {
       title: "Éditeur du site",
       paragraphs: [
-        "Le présent site est édité par Baron Conseil Bâtiment, [forme juridique : entreprise individuelle, SASU…], représentée par [nom et prénom du dirigeant].",
-        "SIRET : [numéro SIRET]. Numéro de TVA intracommunautaire : [numéro de TVA, le cas échéant].",
-        "Adresse : [adresse postale complète].",
-        "Téléphone : 07 44 98 17 75. E-mail : [adresse e-mail].",
+        "Le présent site est édité par la société BARON RENOV, société par actions simplifiée unipersonnelle (SASU) au capital de 1 000,00 €, exerçant sous le nom commercial « Baron Conseil Bâtiment ».",
+        "Siège social : 117, rue de Charenton, 75012 Paris.",
+        "SIREN : 934 120 205 — RCS Paris. SIRET : 934 120 205 00018. Numéro de TVA intracommunautaire : FR 72 934 120 205.",
+        "Téléphone : 07 44 98 17 75. E-mail : baronrenov94@gmail.com.",
       ],
     },
     {
       title: "Directeur de la publication",
-      paragraphs: ["[Nom et prénom du dirigeant], en qualité de [fonction]."],
+      paragraphs: ["[Nom et prénom du président], en qualité de président de la SASU BARON RENOV."],
     },
     {
       title: "Hébergement",
@@ -496,8 +497,7 @@ export const legalNotice = {
     {
       title: "Assurance professionnelle",
       paragraphs: [
-        "Assurance responsabilité civile professionnelle : [compagnie et numéro de contrat].",
-        "Pour les travaux réalisés, assurance de responsabilité décennale : [compagnie, numéro de contrat et couverture géographique].",
+        "Assurance de responsabilité civile décennale : April, contrat n° W4897503.",
       ],
     },
     {
@@ -554,14 +554,14 @@ export const privacy = {
     {
       title: "Responsable du traitement",
       paragraphs: [
-        "Baron Conseil Bâtiment, représentée par [nom et prénom du dirigeant], [adresse postale]. Contact : 07 44 98 17 75 — [adresse e-mail].",
+        "SASU BARON RENOV (nom commercial : Baron Conseil Bâtiment), 117, rue de Charenton, 75012 Paris — SIREN 934 120 205. Contact : 07 44 98 17 75 — baronrenov94@gmail.com.",
       ],
     },
     {
       title: "Données collectées",
       paragraphs: [
         "Le site ne comporte ni formulaire, ni espace client, ni outil de mesure d'audience. Aucune donnée personnelle n'est collectée lors de la simple consultation des pages.",
-        "Lorsque vous me contactez par téléphone ou par WhatsApp, je recueille uniquement les informations que vous me communiquez : nom, numéro de téléphone, adresse du chantier et description de votre projet.",
+        "Lorsque vous me contactez par téléphone, par WhatsApp ou par e-mail, je recueille uniquement les informations que vous me communiquez : nom, numéro de téléphone, adresse du chantier et description de votre projet.",
       ],
     },
     {
@@ -579,7 +579,8 @@ export const privacy = {
     {
       title: "Destinataires",
       paragraphs: [
-        "Vos données sont destinées uniquement à Baron Conseil Bâtiment. Elles ne sont ni vendues, ni louées, ni cédées à des tiers.",
+        "Vos données sont destinées uniquement à BARON RENOV (Baron Conseil Bâtiment). Elles ne sont ni vendues, ni louées, ni cédées à des tiers.",
+        "Les échanges par WhatsApp et par e-mail transitent par les services de WhatsApp (Meta) et de Gmail (Google), selon leurs propres conditions de confidentialité.",
       ],
     },
     {
@@ -597,7 +598,7 @@ export const privacy = {
     {
       title: "Vos droits",
       paragraphs: [
-        "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Pour les exercer, contactez-moi au 07 44 98 17 75 ou à [adresse e-mail].",
+        "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données. Pour les exercer, contactez-moi au 07 44 98 17 75 ou à baronrenov94@gmail.com.",
         "Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (www.cnil.fr).",
       ],
     },
@@ -605,7 +606,7 @@ export const privacy = {
 };
 
 export const footer = {
-  copyright: "© 2026 Baron Conseil Bâtiment. Tous droits réservés.",
+  copyright: "© 2026 Baron Conseil Bâtiment — SASU BARON RENOV. Tous droits réservés.",
   tagline: "Conseil, accompagnement et réalisation de travaux.",
   links: [
     { label: "Mentions légales", href: "/mentions-legales" },
