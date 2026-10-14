@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: { default: site.title, template: `%s — ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description },
   openGraph: {
     type: "website",
     locale: "fr_FR",
